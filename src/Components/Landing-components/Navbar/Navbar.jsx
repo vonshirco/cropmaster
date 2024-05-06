@@ -3,7 +3,7 @@ import './Navbar.css';
 import logo from '../../../assets/logo.png';
 import menu_icon from '../../../assets/menu-icon.png';
 import { Link } from 'react-scroll';
-// import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -37,8 +37,8 @@ const Navbar = () => {
         <li><Link to='benefits' smooth={true} offset={-260} duration={500} onClick={closeMenu}>Why Choose Us</Link></li>
         <li><Link to='contact' smooth={true} offset={-260} duration={500} onClick={closeMenu}>Contact Us</Link></li>
         {/* <li><RouterLink to='/application' onClick={closeMenu} className='btn'>Apply</RouterLink></li> */}
-         <li><button className='btn'>Login</button></li>
-         <li><button className='btn'>Sign Up</button></li>
+         <li><RouterLink to='login'><button className='btn'>Login</button></RouterLink></li>
+         <li><RouterLink to='signup'><button className='btn'>Sign Up</button></RouterLink></li>
       </ul>
       <img src={menu_icon} alt="" className='menu-icon' onClick={toggleMenu}/>
     </nav>

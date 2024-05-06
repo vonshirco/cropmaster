@@ -10,7 +10,7 @@ const Hero = () => {
         <div className='hero-text'>
             <h1>Transforming Agriculture with CropMaster.</h1>
             <p>CropMaster offers essential crop information, marketing opportunities, and expert knowledge, revolutionizing farming practices. Join us for an enhanced farming experience</p>
-            <Link to='services' spy={true} smooth={true} duration={500} className='btn'>Explore More<img src={white_arrow} alt=''/></Link>
+            <Link to='features' spy={true} smooth={true} duration={500} className='btn'>Explore More<img src={white_arrow} alt=''/></Link>
         </div>
     </div>
   )
