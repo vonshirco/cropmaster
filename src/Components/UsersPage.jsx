@@ -1,6 +1,6 @@
 import React from 'react'
 import SideNavigation from './Features-components/SideNavigation/SideNavigation'; 
-import Home from './Features-components/Home/Home';
+import Welcome from './Features-components/Welcome/Welcome';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const UsersPage = () => {
@@ -8,7 +8,7 @@ const UsersPage = () => {
     <div>
         <SideNavigation>
         <Routes>
-          <Route path='/' element={<Home />}/>
+          <Route path='/' element={<Welcome />}/>
         </Routes>
         </SideNavigation>
     </div>

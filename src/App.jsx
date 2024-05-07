@@ -9,6 +9,7 @@ import CropInfo from './Components/Features-components/CropInfo/CropInfo';
 import Profile from './Components/Features-components/Profile/Profile';
 import Articles from './Components/Features-components/Articles/Articles';
 import MarketingOpportunity from './Components/Features-components/MarketingOpportunity/MarketingOpportunity';
+import AdminPage from './Components/AdminPage';
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
           <Route path='/Profile' element={<Profile />}/>
           <Route path='/Articles' element={<Articles />}/>
           <Route path='/MarketingOpportunity' element={<MarketingOpportunity />}/>
+
+          <Route path='/admin' element={<AdminPage/>}/>
 
 
           <Route path="/login" element={<Login />} />
