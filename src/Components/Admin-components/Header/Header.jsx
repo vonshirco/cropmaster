@@ -4,7 +4,7 @@ import {BsFillBellFill, BsFillEnvelopeFill, BsPersonCircle, BsSearch, BsJustify}
 
 const Header = ({OpenSidebar}) => {
   return (
-       <header className='header'>
+       <header className='header-admin'>
         <div className='menu-icon'>
             <BsJustify className='icon' onClick={OpenSidebar}/>
         </div>
@@ -13,8 +13,8 @@ const Header = ({OpenSidebar}) => {
         </div>
         <div className='header-right'>
             <BsFillBellFill className='icon'/>
-            <BsFillEnvelopeFill className='icon'/>
-            <BsPersonCircle className='icon'/>
+            {/* <BsFillEnvelopeFill className='icon'/> */}
+            {/* <BsPersonCircle className='icon'/> */}
         </div>
     </header>
   )

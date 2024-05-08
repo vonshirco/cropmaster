@@ -1,15 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import LandingPage from './Components/LandingPage';
 import UsersPage from './Components/UsersPage';
 import Login from './Components/Pages/Login/Login';
 import Signup from './Components/Pages/Signup/Signup';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Forum from './Components/Features-components/Forum/Forum';
-import CropInfo from './Components/Features-components/CropInfo/CropInfo';
-import Profile from './Components/Features-components/Profile/Profile';
-import Articles from './Components/Features-components/Articles/Articles';
-import MarketingOpportunity from './Components/Features-components/MarketingOpportunity/MarketingOpportunity';
 import AdminPage from './Components/AdminPage';
+
+import CropInfoPage from './Components/Features-components/FeaturesPages/CropInfoPage/CropInfoPage'
+import MarketingOpportunityPage from './Components/Features-components/FeaturesPages/CropInfoPage/CropInfoPage'
+import MarketPage from './Components/Features-components/FeaturesPages/MarketPage';
+import ForumPageLy from './Components/Features-components/FeaturesPages/ForumPageLy/ForumPageLy';
+import ArticlesPageLy from './Components/Features-components/FeaturesPages/ArticlesPageLy/ArticlesPageLy'
+import ProfilePageLy from './Components/Features-components/FeaturesPages/ProfilePageLy /ProfilePageLy';
+
+import Profile from './Components/Features-components/Profile/Profile';
+
 
 const App = () => {
   return (
@@ -18,14 +24,16 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
 
           <Route path='/users-page' element={<UsersPage />}/>
-          <Route path='/CropInfo' element={<CropInfo />}/>
-          <Route path='/Forum' element={<Forum />}/>
-          <Route path='/Profile' element={<Profile />}/>
-          <Route path='/Articles' element={<Articles />}/>
-          <Route path='/MarketingOpportunity' element={<MarketingOpportunity />}/>
+          <Route path='/CropInfo' element={<CropInfoPage />}/>
+          <Route path='/MarketingOpportunity' element={<MarketPage />}/>
+          <Route path='/Forum' element={<ForumPageLy />}/>
+          <Route path='/Articles' element={<ArticlesPageLy />}/>
 
+          <Route path='/Profile' element={<ProfilePageLy />}/>
+          
+
+          
           <Route path='/admin' element={<AdminPage/>}/>
-
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

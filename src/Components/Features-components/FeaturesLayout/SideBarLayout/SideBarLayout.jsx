@@ -12,30 +12,30 @@ const SideBarLayout = ({openSidebarToggle, OpenSidebar}) => {
    <aside id='sidebarlayout' className={openSidebarToggle ? "sidebarlayout-responsive" : ""}>
       <div className="sidebarlayout-title">
         <div className="sidebarlayout-brand">
-            {/* <LuFlower2 className='side_icon_header'/>*/} <h3 className='side-logo'>CROP MASTER</h3> 
+            {/* <LuFlower2 className='side_icon_header'/>*/} <a href="/"><h3 className='side-logo'>CROP MASTER</h3> </a>
         </div>
         <span className='side_icon side_close_icon' onClick={OpenSidebar}>X</span>
       </div>
 
       <ul className='sidebarlayout-list'>
         <li className='sidebarlayout-list-item'>
-          <a href="">
+          <a href="/CropInfo">
             <GiButterflyFlower className='icon'/> Crops
           </a>
         </li>
         <li className='sidebarlayout-list-item'>
-          <a href="">
+          <a href="/MarketingOpportunity">
             <BsListCheck className='icon'/> Markert
           </a>
         </li>
         <li className='sidebarlayout-list-item'>
-          <a href="">
+          <a href="/Forum">
             <MdOutlineForum className='icon'/> Forum
           </a>
         </li>
         
         <li className='sidebarlayout-list-item'>
-          <a href="">
+          <a href="/Articles">
             <GrArticle className='icon'/> Articles
           </a>
         </li>

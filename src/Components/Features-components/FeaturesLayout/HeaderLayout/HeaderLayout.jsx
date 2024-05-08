@@ -14,7 +14,9 @@ const HeaderLayout = ({OpenSidebar}) => {
         <div className='header-right'>
             <BsFillBellFill className='icon'/>
             <BsFillEnvelopeFill className='icon'/>
-            <BsPersonCircle className='icon'/>
+            <a href="/Profile">
+                <BsPersonCircle className='icon'/>
+            </a>
         </div>
     </header>
   )
