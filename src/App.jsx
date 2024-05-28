@@ -28,10 +28,7 @@ const App = () => {
           <Route path='/MarketingOpportunity' element={<MarketPage />}/>
           <Route path='/Forum' element={<ForumPageLy />}/>
           <Route path='/Articles' element={<ArticlesPageLy />}/>
-
           <Route path='/Profile' element={<ProfilePageLy />}/>
-          
-
           
           <Route path='/admin' element={<AdminPage/>}/>
 
