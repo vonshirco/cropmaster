@@ -20,23 +20,28 @@ const SideBarLayout = ({openSidebarToggle, OpenSidebar}) => {
       <ul className='sidebarlayout-list'>
         <li className='sidebarlayout-list-item'>
           <a href="/CropInfo">
-            <GiButterflyFlower className='icon'/> Crops
+            <GiButterflyFlower className='icon'/> Crops Information
           </a>
         </li>
         <li className='sidebarlayout-list-item'>
           <a href="/MarketingOpportunity">
-            <BsListCheck className='icon'/> Markert
+            <BsListCheck className='icon'/> Markert Products
+          </a>
+        </li>
+        <li className='sidebarlayout-list-item'>
+          <a href="/Orders">
+            <BsListCheck className='icon'/> Orders List
           </a>
         </li>
         <li className='sidebarlayout-list-item'>
           <a href="/Forum">
-            <MdOutlineForum className='icon'/> Forum
+            <MdOutlineForum className='icon'/> Forum Discussions
           </a>
         </li>
         
         <li className='sidebarlayout-list-item'>
-          <a href="/Articles">
-            <GrArticle className='icon'/> Seek Advice
+          <a href="/Consultations">
+            <GrArticle className='icon'/> Consultations
           </a>
         </li>
         <li className='sidebarlayout-list-item'>

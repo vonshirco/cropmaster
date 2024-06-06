@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import HeaderLayout from '../../FeaturesLayout/HeaderLayout/HeaderLayout'
 import SideBarLayout from '../../FeaturesLayout/SideBarLayout/SideBarLayout'
-import Articles from '../../Articles/Articles'
+import Consultations from '../../Consultations/Consultations'
 
-const ArticlesPageLy = () => {
+const ConsultationsPageLy = () => {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
 
   const OpenSidebar = () => {
@@ -15,11 +15,11 @@ const ArticlesPageLy = () => {
         <div className='grid-container'>
             <HeaderLayout OpenSidebar={OpenSidebar}/>
             <SideBarLayout openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
-            <Articles/>
+            <Consultations/>
         </div>
     </div>
     
   )
 }
 
-export default ArticlesPageLy
+export default ConsultationsPageLy
