@@ -1,39 +1,40 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import LandingPage from './Components/LandingPage';
-import UsersPage from './Components/UsersPage';
-import Login from './Components/Pages/Login/Login';
-import Signup from './Components/Pages/Signup/Signup';
-import AdminPage from './Components/AdminPage';
+import LandingPage from './Components/Landing-components/LandingPage/LandingPage';
+// import MergeFarmersLayouts from './Components/Farmers-components/FarmersLayout/MergeFarmersLayouts/MergeFarmersLayouts'
+// import MergerBuyersLayouts from './Components/Buyers-components/BuyersLayout/MergeBuyersLayouts/MergeBuyersLayouts'
+// import MergerExpertsLayouts from './Components/Experts-components/ExpertsLayout/MergeExpertsLayouts/MergeExpertsLayouts'
+// import AdminPage from './Components/Admin-components/AdminPage/AdminPage';
+// import Login from './Components/AuthPages/Login/Login';
+// import Signup from './Components/AuthPages/Signup/Signup';
 
-import CropInfoPage from './Components/Features-components/FeaturesPages/CropInfoPage/CropInfoPage'
-import MarketPage from './Components/Features-components/FeaturesPages/MarketPage';
-import OrdersPage from './Components/Features-components/FeaturesPages/OrdersPage/OrdersPage';
-import ForumPageLy from './Components/Features-components/FeaturesPages/ForumPageLy/ForumPageLy';
-import ConsultationsPageLy from './Components/Features-components/FeaturesPages/ConsultationsPageLy/ConsultationsPageLy'
-import ProfilePageLy from './Components/Features-components/FeaturesPages/ProfilePageLy /ProfilePageLy';
+
+
+
+// import UsersPage from './Components/UsersPage';
 
 const App = () => {
   return (
      <div>
-        <Routes>
+
+      <LandingPage />
+      {/* <MergeFarmersLayouts /> */}
+      {/* <MergerBuyersLayouts /> */}
+      {/* <MergerExpertsLayouts /> */}
+      {/* <AdminPage/> */}
+      {/* <Login /> */}
+      {/* <Signup /> */}
+
+
+        {/* <Routes>
           <Route path="/" element={<LandingPage />} />
-
-          {/*Farmers Pages*/}
-          <Route path='/users-page' element={<UsersPage />}/>
           <Route path='/CropInfo' element={<CropInfoPage />}/>
-          <Route path='/Orders' element={<OrdersPage />}/> 
-          <Route path='/MarketingOpportunity' element={<MarketPage />}/>
-          <Route path='/Forum' element={<ForumPageLy />}/>
-          <Route path='/Consultations' element={<ConsultationsPageLy />}/>
-          <Route path='/Profile' element={<ProfilePageLy />}/>
-          
-          <Route path='/admin' element={<AdminPage/>}/>
-
+          <Route path='/Orders' element={<OrdersPage />}/>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+          <Route path="/signup" element={<Signup />} /> 
+        </Routes>  */}
+
     </div>
   );
 }
