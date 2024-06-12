@@ -29,6 +29,13 @@
     border-radius: 5px;
 }
 
+.signup-container form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .signup-container form button {
     padding: 10px 20px;
     background-color: #4CAF50;

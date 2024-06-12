@@ -15,6 +15,13 @@ const Signup = () => {
                 <label htmlFor="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
 
+                <select id="role" name="role">
+                  <option value="">Register as a ?</option>
+                  <option value="Farmer">Farmer</option>
+                  <option value="Buyer">Buyer</option>
+                  <option value="Expert">Expert</option>
+                </select>
+
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required />
 

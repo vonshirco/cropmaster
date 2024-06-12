@@ -5,20 +5,14 @@ import LandingPage from './Components/Landing-components/LandingPage/LandingPage
 // import MergeFarmersLayouts from './Components/Farmers-components/FarmersLayout/MergeFarmersLayouts/MergeFarmersLayouts'
 // import MergerBuyersLayouts from './Components/Buyers-components/BuyersLayout/MergeBuyersLayouts/MergeBuyersLayouts'
 // import MergerExpertsLayouts from './Components/Experts-components/ExpertsLayout/MergeExpertsLayouts/MergeExpertsLayouts'
-// import AdminPage from './Components/Admin-components/AdminPage/AdminPage';
-// import Login from './Components/AuthPages/Login/Login';
-// import Signup from './Components/AuthPages/Signup/Signup';
-
-
-
-
-// import UsersPage from './Components/UsersPage';
+import Login from './Components/AuthPages/Login/Login';
+import Signup from './Components/AuthPages/Signup/Signup';
 
 const App = () => {
   return (
      <div>
 
-      <LandingPage />
+      {/* <LandingPage /> */}
       {/* <MergeFarmersLayouts /> */}
       {/* <MergerBuyersLayouts /> */}
       {/* <MergerExpertsLayouts /> */}
@@ -26,14 +20,11 @@ const App = () => {
       {/* <Login /> */}
       {/* <Signup /> */}
 
-
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path='/CropInfo' element={<CropInfoPage />}/>
-          <Route path='/Orders' element={<OrdersPage />}/>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} /> 
-        </Routes>  */}
+        </Routes> 
 
     </div>
   );
