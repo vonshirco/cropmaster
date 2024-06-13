@@ -31,32 +31,6 @@ const App = () => {
         <Route path="/farmers/*" element={<MergeFarmersLayouts setToken={handleSetToken}/>} />
         <Route path="/buyers/*" element={<MergerBuyersLayouts setToken={handleSetToken}/>} />
         <Route path="/experts/*" element={<MergerExpertsLayouts setToken={handleSetToken}/>} />
-
-        {/* <Route
-          path="/farmers"
-          element={
-            <ProtectedRoute role="farmer">
-              <MergeFarmersLayouts />
-            </ProtectedRoute>
-          }
-        /> */}
-        {/* <Route
-          path="/buyers"
-          element={
-            <ProtectedRoute role="buyer">
-              <MergerBuyersLayouts />
-            </ProtectedRoute>
-          }
-        /> */}
-        {/* <Route
-          path="/experts"
-          element={
-            <ProtectedRoute role="expert">
-              <MergerExpertsLayouts />
-            </ProtectedRoute>
-          }
-        /> */}
-
       </Routes>
     </Router>
   );
