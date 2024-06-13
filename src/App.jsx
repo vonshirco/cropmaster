@@ -34,6 +34,9 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/farmers/*" element={<MergeFarmersLayouts />} />
+        <Route path="/buyers/*" element={<MergerBuyersLayouts />} />
+        <Route path="/experts/*" element={<MergerExpertsLayouts />} />
         <Route
           path="/farmers"
           element={
@@ -42,22 +45,22 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/buyers"
           element={
             <ProtectedRoute role="buyer">
               <MergerBuyersLayouts />
             </ProtectedRoute>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/experts"
           element={
             <ProtectedRoute role="expert">
               <MergerExpertsLayouts />
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
     </Router>
   );

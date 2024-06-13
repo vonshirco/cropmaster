@@ -22,27 +22,27 @@ const SideBarLayout = ({ openSidebarToggle, OpenSidebar }) => {
       <ul className='sidebarlayout-list'>
 
         <li className='sidebarlayout-list-item'>
-          <Link to='/'><GiButterflyFlower className='icon'/> Crops Information</Link>
+          <Link to='/buyers/CropInfo'><GiButterflyFlower className='icon'/> Crops Information</Link>
         </li>
 
         <li className='sidebarlayout-list-item'>
-          <Link to='/MarketProducts'><BsListCheck className='icon'/> Markert Products</Link>
+          <Link to='/buyers/MarketProducts'><BsListCheck className='icon'/> Markert Products</Link>
         </li>
 
         <li className='sidebarlayout-list-item'>
-          <Link to='/OrderProducts'><BsListCheck className='icon'/> Orders Products</Link>
+          <Link to='/buyers/OrderProducts'><BsListCheck className='icon'/> Orders Products</Link>
         </li>
 
         <li className='sidebarlayout-list-item'>
-          <Link to='/Forum'><MdOutlineForum className='icon'/> Forum Discussions</Link>
+          <Link to='/buyers/Forum'><MdOutlineForum className='icon'/> Forum Discussions</Link>
         </li>
         
         <li className='sidebarlayout-list-item'>
-          <Link to='/Consultations'> <GrArticle className='icon'/> Consultations</Link>
+          <Link to='/buyers/Consultations'> <GrArticle className='icon'/> Consultations</Link>
         </li>
 
         <li className='sidebarlayout-list-item'>
-          <Link to='/admin'><MdDashboard className='icon'/> Analytics</Link>
+          <Link to='/buyers/Reports'><MdDashboard className='icon'/> Reports</Link>
         </li>
       </ul>
    </aside>

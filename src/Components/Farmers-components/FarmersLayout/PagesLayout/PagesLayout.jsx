@@ -8,6 +8,7 @@ import MarketProducts from '../../FarmersPages/MarketProducts/MarketProducts'
 import Orders from '../../FarmersPages/Orders/Orders'
 import Forum from '../../FarmersPages/Forum/Forum'
 import Consultations from '../../FarmersPages/Consultations/Consultations'
+import Reports from '../../FarmersPages/Reports/Reports';
 import Profile from '../../FarmersPages/Profile/Profile'
 
 const PagesLayout = () => {
@@ -15,12 +16,13 @@ const PagesLayout = () => {
   return (
     <main className='home-main-container'>
       <Routes>
-        <Route path='/' element={<CropInfo />}/>
-        <Route path='CropInfo' element={<CropInfo/>}/>
+        {/* <Route path='/' element={<CropInfo />}/> */}
+        <Route path='/CropInfo' element={<CropInfo/>}/>
         <Route path='/MarketProducts' element={<MarketProducts />}/>
         <Route path='/Orders' element={<Orders />}/>
         <Route path='/Forum' element={<Forum />}/>
         <Route path='/Consultations' element={<Consultations />}/>
+        <Route path='/Reports' element={<Reports />}/>
         <Route path='/Profile' element={<Profile />}/>
       </Routes>
     </main>

@@ -58,8 +58,8 @@ const Signup = () => {
         <div className="signup-container">
             <h2>Create an Account</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required onChange={handleChange} />
+                <label htmlFor="fullname">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your full name" required onChange={handleChange} />
 
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required onChange={handleChange} />
