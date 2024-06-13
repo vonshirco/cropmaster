@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import LandingPage from './Components/Landing-components/LandingPage/LandingPage';
 import MergeFarmersLayouts from './Components/Farmers-components/FarmersLayout/MergeFarmersLayouts/MergeFarmersLayouts';
@@ -9,42 +9,37 @@ import Login from './Components/AuthPages/Login/Login';
 import Signup from './Components/AuthPages/Signup/Signup';
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const handleSetToken = (token) => {
+    setToken(token);
+    localStorage.setItem('token', token);
+  };
 
-  const ProtectedRoute = ({ children, role }) => {
-    if (!user) {
-      return <Navigate to="/login" />;
-    }
-    if (role && user.role !== role) {
-      return <Navigate to="/" />;
-    }
-    return children;
+  const handleSetUserId = (userId) => {
+    setUserId(userId);
+    localStorage.setItem('userId', userId);
   };
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/login" element={<Login setToken={handleSetToken} setUserId={handleSetUserId} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/farmers/*" element={<MergeFarmersLayouts />} />
-        <Route path="/buyers/*" element={<MergerBuyersLayouts />} />
-        <Route path="/experts/*" element={<MergerExpertsLayouts />} />
-        <Route
+        <Route path="/farmers/*" element={<MergeFarmersLayouts setToken={handleSetToken}/>} />
+        <Route path="/buyers/*" element={<MergerBuyersLayouts setToken={handleSetToken}/>} />
+        <Route path="/experts/*" element={<MergerExpertsLayouts setToken={handleSetToken}/>} />
+
+        {/* <Route
           path="/farmers"
           element={
             <ProtectedRoute role="farmer">
               <MergeFarmersLayouts />
             </ProtectedRoute>
           }
-        />
+        /> */}
         {/* <Route
           path="/buyers"
           element={
@@ -61,6 +56,7 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
+
       </Routes>
     </Router>
   );

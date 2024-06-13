@@ -16,7 +16,7 @@ const PagesLayout = () => {
   return (
     <main className='home-main-container'>
       <Routes>
-        {/* <Route path='/buyers' element={<CropInfo />}/> */}
+        {/* <Route path='/' element={<CropInfo />}/> */}
         <Route path='/CropInfo' element={<CropInfo/>}/>
         <Route path='/MarketProducts' element={<MarketProducts />}/>
         <Route path='/OrderProducts' element={<OrderProducts />}/>
