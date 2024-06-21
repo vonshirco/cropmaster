@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {  BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { AppProvider } from './ context';
 import LandingPage from './Components/Landing-components/LandingPage/LandingPage';
 import MergeFarmersLayouts from './Components/Farmers-components/FarmersLayout/MergeFarmersLayouts/MergeFarmersLayouts';
 import MergerBuyersLayouts from './Components/Buyers-components/BuyersLayout/MergeBuyersLayouts/MergeBuyersLayouts';
@@ -26,6 +26,7 @@ const App = () => {
 
   return (
     <>
+    <AppProvider>
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -40,6 +41,7 @@ const App = () => {
       </Routes>
     
     </Router>
+    </AppProvider>
      
 
       
