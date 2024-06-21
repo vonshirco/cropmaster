@@ -5,7 +5,7 @@ import SinglePost from './SinglePost';
 
 
 const Home = () => {
-  const sections = [ "New Posts", "Most Liked"]
+  const sections = [ "All Posts", "Most Liked"]
   const [activeSection, setActiveSection] = useState(0)
   const [posts, setPosts] = useState([])
   const {newPostAlert} = useGlobalContext()

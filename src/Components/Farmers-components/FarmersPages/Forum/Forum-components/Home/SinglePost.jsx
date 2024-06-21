@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useDebugValue } from 'react';
 import { CiCalendar } from "react-icons/ci";
 import { FaRegComment, FaRegHeart, FaRegUser } from "react-icons/fa";
 import { IoMdHeart } from "react-icons/io";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { timeAgo } from '../../../../../../utils/libs';
+import { useMainContext } from '../../../../../../ context';
+import api from '../../../../../../../api';
+import { useGlobalContext as useCommentContext } from '../Context';
 const SinglePost = ({post}) => {
-    const {title, description, comments:comm, likes:lik, createdAt} = post
-    
+    const {title, description, comments:comm, likes:lik, createdAt, username} = post
+    const {userData} = useMainContext();
     const [clickedComment, setClickedComment] = React.useState(false)
-    const [comments, setComments] = React.useState(comm)
+
+    const [comments, setComments] = React.useState(comm.map(
+        ({author, content, created_at})=>{
+          
+            return {
+                user: author===userData.id ? userData.username: "testUser",
+                comment:content,
+                createdAt: created_at
+            }
+        }
+    ))
+
     const [likes, setLikes] = React.useState(lik)
     const [liked, setLiked] = React.useState(false)
     const handleLike = (incr) => {
@@ -19,12 +33,13 @@ const SinglePost = ({post}) => {
         setComments([...forum[post.id].comments])
     }
   return (
+    
     <div className='bg-white p-3 my-2 shadow-md rounded-md'>
     <h1 className='text-lg font-semibold'>{title}</h1>
     <div className='flex '>
         <div className='flex   items-center pe-2'>
             <FaRegUser className=' text-gray-500 pe-1' />
-            <h1 className=' text-gray-500 '>john</h1>
+            <h1 className=' text-gray-500 '>{username}</h1>
         </div>
         <div className='flex   items-center'>
             <CiCalendar className=' text-gray-500 pe-1 text-lg' />
@@ -56,7 +71,7 @@ const SinglePost = ({post}) => {
     </div>
     <div className='mt-3'>
 
-        {clickedComment && <CommentSection comments={comments} id={post.id} setComments={setComments} />}
+        {clickedComment && <CommentSection comments={comments} id={post.id} setComments={setComments}  />}
         </div>
     
   </div>
@@ -64,20 +79,49 @@ const SinglePost = ({post}) => {
 }
 
 const CommentSection = ({comments, id, setComments}) => {
-   
+   const {newPostAlert, setNewPostAlert} = useCommentContext()
+    const {token, userData} = useMainContext();
+    
     const [comment, setComment] = React.useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(comment==='') return
-        let forum = JSON.parse(localStorage.getItem('forum'))
-        forum[id].comments.push({
-            comment,
-            user: 'joe',
-            createdAt: new Date().toISOString()
-        })
-        setComments([...forum[id].comments])
-        localStorage.setItem('forum', JSON.stringify(forum))
-        setComment('')
+        if(comment===''){
+            setComment('')
+        }
+        const res =  api.post(
+            `/discussion/posts/${id}/add_comment/`, {
+              post:id, content:comment
+            }, { headers:{Authorization: `Token ${token}`}}
+          ).then(
+            ({status, data})=>{
+             if(status===201){
+              
+                api.get(
+                    `/discussion/posts/${id}`,  { headers:{Authorization: `Token ${token}`}})
+                .then(
+                    ({status, data})=>{
+                        if(status===200){
+                        console.log(status)
+                            setComments(data.comments.map(
+                                ({author, content, created_at})=>{
+                                    return {
+                                        user: author=== userData.id ? userData.username: "testUser",
+                                        comment:content,
+                                        createdAt: created_at
+                                    }
+                                }
+                            ))
+                        }
+                    }
+                )
+                
+              
+              console.log('success!', data)
+
+             } 
+            }
+          )
+       setComment('')
     }
     comments.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt)
