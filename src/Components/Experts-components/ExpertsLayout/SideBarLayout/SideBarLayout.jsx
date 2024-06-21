@@ -5,7 +5,7 @@ import { BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeop
 import {LuFlower2} from 'react-icons/lu'
 import { SlLogout } from "react-icons/sl";
 import { GiButterflyFlower } from "react-icons/gi";
-import { MdOutlineForum, MdDashboard, MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { MdOutlineForum, MdDashboard } from "react-icons/md";
 import { GrArticle } from "react-icons/gr";
 import { Link } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ const SideBarLayout = ({ openSidebarToggle, OpenSidebar }) => {
         </li>
 
         <li className='sidebarlayout-list-item'>
-          <Link to='/experts/MarketProducts'><MdOutlineProductionQuantityLimits className='icon'/> Markert Products</Link>
+          <Link to='/experts/MarketProducts'><BsListCheck className='icon'/> Markert Products</Link>
         </li>
 
         <li className='sidebarlayout-list-item'>
