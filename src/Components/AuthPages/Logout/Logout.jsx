@@ -10,7 +10,7 @@ const Logout = ({ setToken, setUserId }) => {
     setUserId('');
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    navigate('/login');
+    navigate('/');
   }, [setToken, setUserId, navigate]);
 
   return null;
