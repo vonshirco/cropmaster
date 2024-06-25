@@ -1,101 +1,139 @@
-import React, { useState }from 'react';
-import './CropInfo.css'; // Import your existing CSS file
-
-const cropCategories = ['All', 'Crops', 'Fruits', 'Vegetables'];
-
-
-const cropsData = [
-  {
-    name: 'Corn',
-    image: 'https://via.placeholder.com/150x150?text=Corn', // Placeholder image
-    description: 'Corn is a cereal grain native to Central America. It is the most widely cultivated cereal grain in the world.',
-    state: 'Widely Grown',
-    category: 'Crops', // Add category: 'Crops'
-  },
-  {
-    name: 'Soybean',
-    image: 'https://via.placeholder.com/150x150?text=Soybean', // Placeholder image
-    description: 'Soybean is a legume from East Asia, widely grown for its edible beans. It is a major source of vegetable protein and oil.',
-    state: 'Major Producer: USA, Brazil',
-    category: 'Crops', // Add category: 'Crops'
-  },
-  {
-    name: 'Wheat',
-    image: 'https://via.placeholder.com/150x150?text=Wheat', // Placeholder image
-    description: 'Wheat is a cereal grain widely grown on most continents. It is a major source of nutrition and used in various food products.',
-    state: 'Global Staple Food',
-    category: 'Crops', // Add category: 'Crops'
-  },
-  {
-    name: 'Rice',
-    image: 'https://via.placeholder.com/150x150?text=Rice', // Placeholder image
-    description: 'Rice is a cereal grain native to Southeast Asia, and the most widely consumed staple food for a large part of the world\'s population.',
-    state: 'Essential Food Source',
-    category: 'Crops', // Add category: 'Crops'
-  },
-  {
-    name: 'Barley',
-    image: 'https://via.placeholder.com/150x150?text=Barley', // Placeholder image
-    description: 'Barley is a cereal grain grown in temperate climates globally. It is used for brewing beer, as animal feed, and in various food products.',
-    state: 'Ancient Grain',
-    category: 'Crops', // Add category: 'Crops'
-  },
-  {
-    name: 'Tomato',
-    image: 'https://via.placeholder.com/150x150?text=Tomato', // Placeholder image
-    description: 'Tomato is a fruit (considered a vegetable in culinary terms) native to South America. It is a major agricultural crop used for fresh consumption, processing, and sauces.',
-    state: 'Globally Important Vegetable',
-    category: 'Vegetables', // Add category: 'Vegetables'
-  },
-  {
-    name: 'Potato',
-    image: 'https://via.placeholder.com/150x150?text=Potato', // Placeholder image
-    description: 'Potato is a starchy tuber vegetable native to the Andes mountains in South America. It is a major food source globally.',
-    state: 'Fourth Largest Food Crop',
-    category: 'Vegetables', // Add category: 'Vegetables'
-  },
-  {
-    name: 'Cotton',
-    image: 'https://via.placeholder.com/150x150?text=Cotton', // Placeholder image
-    description: 'Cotton is a soft fiber grown for use in textiles. It is the most widely used natural fiber globally and has a significant impact on the textile industry.',
-    state: 'Major Cash Crop',
-    category: 'Others', // Add category: 'Others' (assuming it's not a crop or vegetable)
-  },
-];
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './CropInfo.css';
 
 const CropInfo = () => {
-const [selectedCategory, setSelectedCategory] = useState('All');
-const [filteredCrops, setFilteredCrops] = useState(cropsData); // Pre-calculate filtered crops
+  const [crops, setCrops] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newCrop, setNewCrop] = useState({
+    name: '',
+    category: '',
+    description: {
+      planting_requirements: '',
+      irrigation_schedule: '',
+      fertilizer_recommendations: '',
+      pest_management: '',
+      harvesting_techniques: ''
+    }
+  });
 
-const handleCropCategoryChange = (event) => {
-  setSelectedCategory(event.target.value);
-  const filtered = cropsData.filter((crop) => crop.category === event.target.value || event.target.value === 'All');
-  setFilteredCrops(filtered);
-};
+  useEffect(() => {
+    const fetchCrops = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('https://tyktyk.pythonanywhere.com/cropinfo/crops/', {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+        setCrops(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
 
+    fetchCrops();
+  }, []);
+
+  const handleAddCrop = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post('https://tyktyk.pythonanywhere.com/cropinfo/crops/', newCrop, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      setCrops([...crops, response.data]);
+      setNewCrop({
+        name: '',
+        category: '',
+        description: {
+          planting_requirements: '',
+          irrigation_schedule: '',
+          fertilizer_recommendations: '',
+          pest_management: '',
+          harvesting_techniques: ''
+        }
+      });
+      setShowAddForm(false);
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   return (
     <div className='crop-container'>
       <h1>Crop Information</h1>
-      <div className='category-filter'>
-      <select value={selectedCategory} onChange={handleCropCategoryChange}>
-        {cropCategories.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-    </div>
+      <button onClick={() => setShowAddForm(true)}>Add Crop</button>
+      {showAddForm && (
+        <form onSubmit={handleAddCrop}>
+          <input
+            type='text'
+            placeholder='Name'
+            value={newCrop.name}
+            onChange={(e) => setNewCrop({ ...newCrop, name: e.target.value })}
+          />
+          <input
+            type='text'
+            placeholder='Category'
+            value={newCrop.category}
+            onChange={(e) => setNewCrop({ ...newCrop, category: e.target.value })}
+          />
+          <input
+            type='text'
+            placeholder='Planting Requirements'
+            value={newCrop.description.planting_requirements}
+            onChange={(e) => setNewCrop({ ...newCrop, description: { ...newCrop.description, planting_requirements: e.target.value } })}
+          />
+          <input
+            type='text'
+            placeholder='Irrigation Schedule'
+            value={newCrop.description.irrigation_schedule}
+            onChange={(e) => setNewCrop({ ...newCrop, description: { ...newCrop.description, irrigation_schedule: e.target.value } })}
+          />
+          <input
+            type='text'
+            placeholder='Fertilizer Recommendations'
+            value={newCrop.description.fertilizer_recommendations}
+            onChange={(e) => setNewCrop({ ...newCrop, description: { ...newCrop.description, fertilizer_recommendations: e.target.value } })}
+          />
+          <input
+            type='text'
+            placeholder='Pest Management'
+            value={newCrop.description.pest_management}
+            onChange={(e) => setNewCrop({ ...newCrop, description: { ...newCrop.description, pest_management: e.target.value } })}
+          />
+          <input
+            type='text'
+            placeholder='Harvesting Techniques'
+            value={newCrop.description.harvesting_techniques}
+            onChange={(e) => setNewCrop({ ...newCrop, description: { ...newCrop.description, harvesting_techniques: e.target.value } })}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+      )}
+      {loading && <div>Loading...</div>}
+      {error && <div>Error: {error.message}</div>}
       <div className='crop-cards'>
-      {filteredCrops.map((crop) => (
-        <div key={crop.name} className='crop-card'>
-          <img src={crop.image} alt={crop.name} />
+        {crops.map((crop) => (
+          <div key={crop.id} className="crop-card">
             <h2>{crop.name}</h2>
-            <p>{crop.description}</p>
-            <span>{crop.state}</span>
-        </div>
-      ))}
+            <img src={crop.image} alt={crop.name} />
+            <p><strong>Category:</strong> {crop.category}</p>
+            <p><strong>Planting Requirements:</strong> {crop.description.planting_requirements}</p>
+            <p><strong>Irrigation Schedule:</strong> {crop.description.irrigation_schedule}</p>
+            <p><strong>Fertilizer Recommendations:</strong> {crop.description.fertilizer_recommendations}</p>
+            <p><strong>Pest Management:</strong> {crop.description.pest_management}</p>
+            <p><strong>Harvesting Techniques:</strong> {crop.description.harvesting_techniques}</p>
+            <p><strong>Total Rating:</strong> {crop.total_rating}</p>
+            <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
