@@ -9,9 +9,9 @@ const SingleExpert = ({expert, userId}) => {
     const desc= description || "She is a Poultry Expert with over 10 years of experience in the field. She has worked with various organizations in Kenya and Uganda. She is a consultant for the World Bank and the United Nations. She has a PhD in Agriculture from the University of Nairobi"
 
   return (
-    <div className=''>
+    <div className=' shadow'>
     <div className='relative'>
-    <img src={expImage7} alt={username} className='mx-auto rounded w-80' />
+
 
     </div>
     <div className='w-80 mx-auto'>
@@ -28,10 +28,7 @@ const SingleExpert = ({expert, userId}) => {
     </button>
 
     </div>
-        <div>
-            <p className='text-sm font-light opacity-75'>{desc}</p>
-     
-        </div>
+       
         </div>
     </div>
   )

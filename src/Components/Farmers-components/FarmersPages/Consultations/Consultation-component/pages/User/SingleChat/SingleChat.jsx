@@ -144,7 +144,7 @@ let curr_date = new Date('1970-01-01').toISOString();
     
   
     <div className='flex sticky top-0 bg-white  inset-x-0 items-center py-2  z-10 pl-12 shadow pb-3 '>
-                    <img src={expImage7} alt={expert.username} className='rounded-full w-10 h-10' />
+
                     <div className='ml-3 '>
                     <div className=' justify-self-start'>
                     <h1 className='font-semibold'>Dr.{expert.username}</h1>
