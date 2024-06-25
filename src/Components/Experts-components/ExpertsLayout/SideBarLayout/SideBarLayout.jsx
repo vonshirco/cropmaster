@@ -35,7 +35,7 @@ const SideBarLayout = ({ openSidebarToggle, OpenSidebar }) => {
         </li>
         
         <li className='sidebarlayout-list-item'>
-          <Link to='/experts/Consultations'> <GrArticle className='icon'/> Consultations</Link>
+          <Link to='/experts/Consultations/messages'> <GrArticle className='icon'/> Consultations</Link>
         </li>
 
         <li className='sidebarlayout-list-item'>
