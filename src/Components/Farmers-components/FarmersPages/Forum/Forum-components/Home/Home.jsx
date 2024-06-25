@@ -21,13 +21,14 @@ const Home = () => {
       )
       const postsArray = results.map(
         (it)=>{
-          const { title, author, content, comments, created_at, id} = it;
+          const { title, author, content, comments, created_at, id, liked_by_user, likes_count} = it;
           return {
             id,
         username: author === userData.id ? userData.username:"testUser",
+            liked_by_user,
+            likes_count,
             comments,
             title, 
-            likes:0,
             description:content,
             createdAt:created_at
   
@@ -38,7 +39,7 @@ const Home = () => {
       if(activeSection===1){
         // most liked
         postsArray.sort((a, b) => {
-          return b.likes - a.likes
+          return b.likes_count - a.likes_count
         })}
       else if(activeSection===0){
         // all forums
@@ -74,7 +75,7 @@ const Home = () => {
    
    
         return  (
-        <SinglePost key={post.id}  post={post} />
+        <SinglePost key={post.id}  pst={post} />
       )}
       )}
       </div>

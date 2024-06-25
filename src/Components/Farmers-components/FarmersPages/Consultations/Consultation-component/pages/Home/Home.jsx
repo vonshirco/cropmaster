@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HoverRound from '../../components/HoverRound';
 import { LuMessagesSquare } from "react-icons/lu";
 import SingleExpert from './SingleExpert';
 import experts from './experts';
 import { useNavigate } from 'react-router-dom';
+import { useMainContext } from '../../../../../../../ context';
+import api from '../../../../../../../../api';
 const Home = () => {
   const navigate = useNavigate();
+  const {userData, token} = useMainContext()
+  async function fetchExperts(){
+    const {data} =  await  api.get(
+      '/seek-advice/available-officers/',  { headers:{Authorization: `Token ${token}`}})
+  }
+  useEffect(
+    ()=>{
+      fetchExperts()
+    },[]
+  )
   return (
     <div className=' '>
     <div className='p-3 shadow sticky  top-0 z-10 w-full bg-green-800 text-white '>
