@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-
+import { useMainContext } from '../../../ context';
 const Login = ({ setToken, setUserId}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const {handleSetUserData, handleSetToken} = useMainContext();
+
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -16,15 +18,15 @@ const Login = ({ setToken, setUserId}) => {
             username,
             password,
           });
-          setToken(response.data.key);
+          handleSetToken(response.data.key);
     
           const userResponse = await axios.get('https://tyktyk.pythonanywhere.com/api/user-details/', {
             headers: {
               'Authorization': `Token ${response.data.key}`
             }
           });
-    
-          setUserId(userResponse.data.pk);
+          handleSetUserData({id:userResponse.data.pk, username:userResponse.data.username});
+          
     
           const role = userResponse.data.role;
     
