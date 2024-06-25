@@ -7,6 +7,7 @@ import { formatDate } from '../../../utils/libs';
 import  expImage7 from '../../../assets/images/expert7.jpeg';
 import api from '../../../../../../../../../api';
 import { useMainContext } from '../../../../../../../../ context';
+import api2 from '../../../../../../../../../api2';
 const SingleChat = () => {
 const {id} = useParams();
 const [message, setMessage] = useState('');
@@ -17,6 +18,7 @@ const {token, userData} = useMainContext();
 const [expert, setExpert] = useState({
 
 }); 
+const socket = React.useRef(null);
 
 async function fetchExpert(){
   const {data} =  await  api.get(
@@ -47,13 +49,61 @@ function isNotObtainedDate(obtained_date, current_date) {
     }
   }
 
+ useEffect(
+  ()=>{
+    async function fetchMessages(){
+     
+      const {data:{results}} = await api2.get(
+        `/messages?room=${id}`
+      )
+      setMessages(results)
+
+    }
+    fetchMessages();  
+  },[]
+ )
+
+
+
+ useEffect(() => {
+  // Create WebSocket connection
+  
+  socket.current = new WebSocket(`wss://fierylion.me/ws/room/${id}/`);
+
+  // Connection opened
+  socket.current.onopen = () => {
+    console.log('WebSocket is open now.');
+  };
+
+  // Listen for messages
+  socket.current.onmessage = (event) => {
  
+    const message = JSON.parse( event.data);
+    setMessages(prevMessages => [...prevMessages, message.message]);
+    setNewMessage(Math.random())
+  };
+
+  // Handle errors
+  socket.current.onerror = (error) => {
+    console.error('WebSocket error:', error);
+  };
+
+  // Connection closed
+  socket.current.onclose = () => {
+    console.log('WebSocket is closed now.');
+  };
+
+  // Clean up WebSocket connection when component unmounts
+  return () => {
+    if (socket.current) {
+      socket.current.close();
+    }
+  };
+}, []);
+
   useEffect(()=>{
     window.scrollTo(0,document.body.scrollHeight);
-    const consultation =  JSON.parse(localStorage.getItem("consultation") || '{}');
-    console.log(consultation)
-    setMessages(consultation[id] || []);
-
+    
 
 
   }, [newMessage])
@@ -67,16 +117,22 @@ const handleSend = (e)=>{
         return;
     }
     const newMessage = {
-        message,
-        sender:"farmer",
-        date: new Date().toISOString()
+        content:message,
+        creator:"user",
+        username:userData.username,
+        created_at: new Date().toISOString()
     }
-    const consultation =  JSON.parse(localStorage.getItem("consultation") || '{}');
-    const allMessages = [...messages, newMessage];
-    consultation[id] = allMessages;
-    localStorage.setItem("consultation", JSON.stringify(consultation));
-    setMessage("");
+    console.log(newMessage)
+    if (socket.current.readyState === WebSocket.OPEN) {
+      socket.current.send(JSON.stringify(newMessage));
+      setMessages(prevMessages => [...prevMessages, newMessage]);
+      setMessage("");
+
     setNewMessage( Math.random());
+    } else {
+      console.error('WebSocket is not open.');
+    }
+  
 }
 
 let curr_date = new Date('1970-01-01').toISOString();
@@ -103,19 +159,19 @@ let curr_date = new Date('1970-01-01').toISOString();
     {
         messages.map((mess)=>{
           
-            const isNotObtainDate = isNotObtainedDate(mess.date, curr_date);
+            const isNotObtainDate = isNotObtainedDate(mess.created_at, curr_date);
 
             if(isNotObtainDate){
-                curr_date = mess.date;
+                curr_date = mess.created_at;
             }
 
             return (
 <div className='flex flex-col' >
 { isNotObtainDate &&
-<small className=' self-center text-xs text-gray-600 font-semibold my-3'>{formatDate(mess.date)}</small>}
-                <div className={`${mess.sender==="expert"?" self-start bg-gray-400 text-black ":"self-end  bg-green-700 text-white"} p-2 rounded-full text-sm text-center`}>
+<small className=' self-center text-xs text-gray-600 font-semibold my-3'>{formatDate(mess.created_at)}</small>}
+                <div className={`${mess.creator==="expert"?" self-start bg-gray-400 text-black ":"self-end  bg-green-700 text-white"} p-2 rounded-full text-sm text-center`}>
 
-                    {mess.message}
+                    {mess.content}
                 </div>
                 </div>
             )

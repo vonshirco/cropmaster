@@ -4,13 +4,17 @@ import BackBtn from '../../../components/BackBtn';
 import experts from '../Messages/users';
 import { FaChevronCircleRight } from "react-icons/fa";
 import { formatDate } from '../../../utils/libs';
+import api2 from '../../../../../../../../../api2';
+import { useMainContext } from '../../../../../../../../ context';
+
 const SingleChat = () => {
 const {id} = useParams();
 const [message, setMessage] = useState('');
+const [usr, setUsr] = useState('')
 const [messages, setMessages] = useState([]);
 const [newMessage, setNewMessage] = useState('');
 const userId = id.split("_")[0];
-
+const {token, userData} = useMainContext();
 function isNotObtainedDate(obtained_date, current_date) {
     const currentDate = new Date(current_date);
     const obtainedDate = new Date(obtained_date);
@@ -28,19 +32,15 @@ function isNotObtainedDate(obtained_date, current_date) {
   }
   useEffect(()=>{
     window.scrollTo(0,document.body.scrollHeight);
-    const consultation =  JSON.parse(localStorage.getItem("consultation") || '{}');
-    console.log(consultation)
-    setMessages(consultation[id] || []);
+    api2.get(`/expert_users/${id}`).then(({data})=>{
+      setUsr(data.username)
+    })
 
 
 
-  }, [newMessage])
+  }, [])
 
-//find user
-const user = experts.find((usr)=>{
-    return usr.id === userId;
 
-})
 const handleSend = (e)=>{
     e.preventDefault();
     if(message.trim() === ""){
@@ -70,10 +70,10 @@ let curr_date = new Date('1970-01-01').toISOString();
  
 
  <div className='flex sticky top-0 bg-white  inset-x-0 items-center py-2  z-10 pl-12 shadow pb-3 '>
-                 <img src={user.img} alt={user.name} className='rounded-full w-10 h-10' />
+ 
                  <div className='ml-3 '>
                  <div className=' justify-self-start'>
-                 <h1 className='font-semibold'>{user.name}</h1>
+                 <h1 className='font-semibold'>{usr}</h1>
 
 </div>
                  </div>
