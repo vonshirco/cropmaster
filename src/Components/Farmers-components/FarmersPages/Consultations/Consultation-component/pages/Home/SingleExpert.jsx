@@ -1,21 +1,27 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
-const SingleExpert = ({expert}) => {
-    const {name, img, description, education, title, location} = expert
+import  expImage7 from '../../assets/images/expert7.jpeg';
+import { FaLocationDot } from "react-icons/fa6";
+const SingleExpert = ({expert, userId}) => {
+    const {id, username, phone_number, location, first_name, last_name, description, img} = expert
     const navigate = useNavigate();
-    const userId = "999";
+
+    const desc= description || "She is a Poultry Expert with over 10 years of experience in the field. She has worked with various organizations in Kenya and Uganda. She is a consultant for the World Bank and the United Nations. She has a PhD in Agriculture from the University of Nairobi"
+
   return (
     <div className=''>
     <div className='relative'>
-    <img src={img} alt={name} className='mx-auto rounded w-80' />
-    <div className='absolute bottom-2 left-2 bg-green-800 p-1 text-white rounded'>{title}</div>
+    <img src={expImage7} alt={username} className='mx-auto rounded w-80' />
+
     </div>
     <div className='w-80 mx-auto'>
     <div className='flex justify-between items-center'> 
-    <h1 className='my-3 font-semibold '>{name}</h1>
+    <div>
+    <h1 className='my-3 font-semibold '>Dr.{username} <br/> <div className='flex items-center'><FaLocationDot className=''/> <small>{location}</small></div> </h1>
+   
+    </div>
     <button className=' hover:border-0 border border-black text-black hover:text-white hover:bg-black text-sm  px-2  h-8 font-semibold rounded transition duration-100' onClick={()=>{
-        navigate(`/farmers/Consultations/messages/${userId}_${expert.id}/`)
+        navigate(`/farmers/Consultations/messages/${userId}_${id}/`)
 
     }}>
         Consult
@@ -23,7 +29,7 @@ const SingleExpert = ({expert}) => {
 
     </div>
         <div>
-            <p className='text-sm font-light opacity-75'>{description}</p>
+            <p className='text-sm font-light opacity-75'>{desc}</p>
      
         </div>
         </div>

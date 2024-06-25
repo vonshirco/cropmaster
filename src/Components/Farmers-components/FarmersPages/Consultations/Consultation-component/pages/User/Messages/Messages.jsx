@@ -5,13 +5,32 @@ import { IoSearchSharp } from "react-icons/io5";
 import experts from './experts';
 import SingleExpert from '../../Home/SingleExpert';
 import SingleChat from './SingleChat';
+import { useMainContext } from '../../../../../../../../ context'
+import api from '../../../../../../../../../api'
+import { useEffect } from 'react'
+
 const Messages = () => {
+
+  const {userData, token} = useMainContext()
+  const [experts, setExperts] = React.useState([])
+  async function fetchExperts(){
+    const {data} =  await  api.get(
+      '/seek-advice/available-officers/',  { headers:{Authorization: `Token ${token}`}})
+    setExperts(data)
+  }
+  useEffect(
+    ()=>{
+      fetchExperts()
+
+
+    },[]
+  )
   return (
     <>
     <BackBtn />
     <div className=''>
     <div className='sticky top-0 z-0 pt-4 pl-14 pb-2  flex items-center w-full shadow '>
-    <h1 className=' font-semibold text-lg'>Daniel</h1>
+    <h1 className=' font-semibold text-lg'>{userData.username}</h1>
     <RiArrowDropDownLine className='text-2xl' />
     </div>
     <div className=' overflow-y-scroll mx-3 mt-3'>

@@ -4,13 +4,33 @@ import BackBtn from '../../../components/BackBtn';
 import experts from '../../Home/experts';
 import { FaChevronCircleRight } from "react-icons/fa";
 import { formatDate } from '../../../utils/libs';
+import  expImage7 from '../../../assets/images/expert7.jpeg';
+import api from '../../../../../../../../../api';
+import { useMainContext } from '../../../../../../../../ context';
 const SingleChat = () => {
 const {id} = useParams();
 const [message, setMessage] = useState('');
 const [messages, setMessages] = useState([]);
 const [newMessage, setNewMessage] = useState('');
 const expertId = id.split("_")[1];
+const {token, userData} = useMainContext();
+const [expert, setExpert] = useState({
 
+}); 
+
+async function fetchExpert(){
+  const {data} =  await  api.get(
+    `/seek-advice/extension-officer/${expertId}/`,  { headers:{Authorization: `Token ${token}`}})
+   
+  setExpert(data)
+}
+useEffect(
+  ()=>{
+    fetchExpert()
+
+
+  },[]
+)
 function isNotObtainedDate(obtained_date, current_date) {
     const currentDate = new Date(current_date);
     const obtainedDate = new Date(obtained_date);
@@ -26,6 +46,8 @@ function isNotObtainedDate(obtained_date, current_date) {
       return false;
     }
   }
+
+ 
   useEffect(()=>{
     window.scrollTo(0,document.body.scrollHeight);
     const consultation =  JSON.parse(localStorage.getItem("consultation") || '{}');
@@ -38,11 +60,7 @@ function isNotObtainedDate(obtained_date, current_date) {
 
 
 
-//find expert
-const expert = experts.find((exp)=>{
-    return exp.id == expertId;
 
-})
 const handleSend = (e)=>{
     e.preventDefault();
     if(message.trim() === ""){
@@ -70,11 +88,11 @@ let curr_date = new Date('1970-01-01').toISOString();
     
   
     <div className='flex sticky top-0 bg-white  inset-x-0 items-center py-2  z-10 pl-12 shadow pb-3 '>
-                    <img src={expert.img} alt={expert.name} className='rounded-full w-10 h-10' />
+                    <img src={expImage7} alt={expert.username} className='rounded-full w-10 h-10' />
                     <div className='ml-3 '>
                     <div className=' justify-self-start'>
-                    <h1 className='font-semibold'>{expert.name}</h1>
-                   <small className='text-xs'>{expert.title}</small>
+                    <h1 className='font-semibold'>Dr.{expert.username}</h1>
+                
 </div>
                     </div>
     </div>

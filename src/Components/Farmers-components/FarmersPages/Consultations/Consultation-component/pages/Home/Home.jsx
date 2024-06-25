@@ -2,20 +2,24 @@ import React, { useEffect } from 'react'
 import HoverRound from '../../components/HoverRound';
 import { LuMessagesSquare } from "react-icons/lu";
 import SingleExpert from './SingleExpert';
-import experts from './experts';
+
 import { useNavigate } from 'react-router-dom';
 import { useMainContext } from '../../../../../../../ context';
 import api from '../../../../../../../../api';
 const Home = () => {
   const navigate = useNavigate();
   const {userData, token} = useMainContext()
+  const [experts, setExperts] = React.useState([])
   async function fetchExperts(){
     const {data} =  await  api.get(
       '/seek-advice/available-officers/',  { headers:{Authorization: `Token ${token}`}})
+    setExperts(data)
   }
   useEffect(
     ()=>{
       fetchExperts()
+
+
     },[]
   )
   return (
@@ -36,7 +40,7 @@ const Home = () => {
       {
         experts.map((expert)=>{
           return (
-            <SingleExpert expert={expert} />
+            <SingleExpert expert={expert} userId={userData.id} />
           )
         })
       }

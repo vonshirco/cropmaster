@@ -5,7 +5,7 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill} 
 // import MergeLayouts from '../MergeBuyersLayouts/MergeBuyersLayouts';
 import CropInfo from '../../ExpertsPages/CropInfo/CropInfo';
 import MarketProducts from '../../ExpertsPages/MarketProducts/MarketProducts'
-import Forum from '../../ExpertsPages/Forum/Forum-components/Page'
+import Forum from '../../../Farmers-components/FarmersPages/Forum/Forum-components/Page'
 import Consultations from '../../ExpertsPages/Consultations/Consultation-component/PageRouter'
 import Reports from '../../ExpertsPages/Reports/Reports';
 import Profile from '../../ExpertsPages/Profile/Profile'
