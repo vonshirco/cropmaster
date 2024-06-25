@@ -13,6 +13,7 @@ const Messages = () => {
   async function fetchUsers(){
     const {data:{results}} =  await  api.get(
       `/expert_users?expert_id=${userData.id}`)
+    
     setUsers(results)
   }
   useEffect(
@@ -40,7 +41,7 @@ const Messages = () => {
         {
             users.map((user)=>{
                 return (
-                   <SingleChat user={user} key={user.id} expert_id={userData.id} />
+                   <SingleChat user={user} key={user.id} id={user.id} />
                 )
             })
         }

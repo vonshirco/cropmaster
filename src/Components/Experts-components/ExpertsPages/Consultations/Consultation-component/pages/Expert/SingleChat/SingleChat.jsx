@@ -15,6 +15,88 @@ const [messages, setMessages] = useState([]);
 const [newMessage, setNewMessage] = useState('');
 const userId = id.split("_")[0];
 const {token, userData} = useMainContext();
+const socket = React.useRef(null);
+useEffect(
+  ()=>{
+    async function fetchMessages(){
+     
+      const {data:{results}} = await api2.get(
+        `/messages?room=${id}`
+      )
+      setMessages(results)
+
+    }
+    fetchMessages();  
+  },[]
+ )
+ useEffect(() => {
+  // Create WebSocket connection
+  
+  socket.current = new WebSocket(`wss://fierylion.me/ws/room/${id}/`);
+
+  // Connection opened
+  socket.current.onopen = () => {
+    console.log('WebSocket is open now.');
+  };
+
+  // Listen for messages
+  socket.current.onmessage = (event) => {
+ 
+    const message = JSON.parse( event.data);
+    setMessages(prevMessages => [...prevMessages, message.message]);
+    setNewMessage(Math.random())
+  };
+
+  // Handle errors
+  socket.current.onerror = (error) => {
+    console.error('WebSocket error:', error);
+  };
+
+  // Connection closed
+  socket.current.onclose = () => {
+    console.log('WebSocket is closed now.');
+  };
+
+  // Clean up WebSocket connection when component unmounts
+  return () => {
+    if (socket.current) {
+      socket.current.close();
+    }
+  };
+}, []);
+
+  useEffect(()=>{
+    window.scrollTo(0,document.body.scrollHeight);
+    
+
+
+  }, [newMessage])
+
+  const handleSend = (e)=>{
+    e.preventDefault();
+    if(message.trim() === ""){
+        return;
+    }
+    const newMessage = {
+        content:message,
+        creator:"expert",
+        username:userData.username,
+        created_at: new Date().toISOString()
+    }
+ 
+    if (socket.current.readyState === WebSocket.OPEN) {
+      socket.current.send(JSON.stringify(newMessage));
+      setMessages(prevMessages => [...prevMessages, newMessage]);
+      setMessage("");
+
+    setNewMessage( Math.random());
+    } else {
+      console.error('WebSocket is not open.');
+    }
+  
+}
+
+
 function isNotObtainedDate(obtained_date, current_date) {
     const currentDate = new Date(current_date);
     const obtainedDate = new Date(obtained_date);
@@ -31,7 +113,7 @@ function isNotObtainedDate(obtained_date, current_date) {
     }
   }
   useEffect(()=>{
-    window.scrollTo(0,document.body.scrollHeight);
+
     api2.get(`/expert_users/${id}`).then(({data})=>{
       setUsr(data.username)
     })
@@ -41,26 +123,7 @@ function isNotObtainedDate(obtained_date, current_date) {
   }, [])
 
 
-const handleSend = (e)=>{
-    e.preventDefault();
-    if(message.trim() === ""){
-        return;
-    }
-    const newMessage = {
-        message,
-        sender:"expert",
-        date: new Date().toISOString()
-    }
-    const consultation =  JSON.parse(localStorage.getItem("consultation") || '{}');
-    const allMessages = [...messages, newMessage];
-    consultation[id] = allMessages;
-    localStorage.setItem("consultation", JSON.stringify(consultation));
-    setMessage("");
-    setNewMessage( Math.random());
-}
-useEffect(()=>{
 
-})
 
 let curr_date = new Date('1970-01-01').toISOString();
   return (
@@ -85,19 +148,19 @@ let curr_date = new Date('1970-01-01').toISOString();
  {
      messages.map((mess)=>{
        
-         const isNotObtainDate = isNotObtainedDate(mess.date, curr_date);
+         const isNotObtainDate = isNotObtainedDate(mess.created_at, curr_date);
 
          if(isNotObtainDate){
-             curr_date = mess.date;
+             curr_date = mess.created_at;
          }
 
          return (
 <div className='flex flex-col' >
 { isNotObtainDate &&
-<small className=' self-center text-xs text-gray-600 font-semibold my-3'>{formatDate(mess.date)}</small>}
-             <div className={`${mess.sender==="farmer"?" self-start bg-gray-400 text-black ":"self-end  bg-green-700 text-white"} p-2 rounded-full text-sm text-center`}>
+<small className=' self-center text-xs text-gray-600 font-semibold my-3'>{formatDate(mess.created_at)}</small>}
+             <div className={`${mess.creator==="user"?" self-start bg-gray-400 text-black ":"self-end  bg-green-700 text-white"} p-2 rounded-full text-sm text-center`}>
 
-                 {mess.message}
+                 {mess.content}
              </div>
              </div>
          )

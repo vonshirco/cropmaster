@@ -122,7 +122,7 @@ const handleSend = (e)=>{
         username:userData.username,
         created_at: new Date().toISOString()
     }
-    console.log(newMessage)
+ 
     if (socket.current.readyState === WebSocket.OPEN) {
       socket.current.send(JSON.stringify(newMessage));
       setMessages(prevMessages => [...prevMessages, newMessage]);
