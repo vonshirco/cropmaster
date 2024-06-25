@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/logout" element={<Logout setToken={handleSetToken} setUserId={handleSetUserId} />} /> 
         <Route path="/farmers/*" element={<MergeFarmersLayouts setToken={handleSetToken}/>} />
         <Route path="/buyers/*" element={<MergerBuyersLayouts setToken={handleSetToken}/>} />
-        <Route path="/experts/*" element={<MergerExpertsLayouts setToken={handleSetToken}/>} />
+        <Route path="/experts/*" element={<MergerExpertsLayouts token={token} userId={userId}/>} />
       </Routes>
     </Router>
   );
