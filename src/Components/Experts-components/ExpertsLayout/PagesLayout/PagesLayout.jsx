@@ -37,9 +37,9 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './PagesLayout.css';
 import CropInfo from '../../ExpertsPages/CropInfo/CropInfo';
-import MarketProducts from '../../ExpertsPages/MarketProducts/MarketProducts'
-import Forum from '../../../Farmers-components/FarmersPages/Forum/Forum-components/Page'
-import Consultations from '../../ExpertsPages/Consultations/Consultation-component/PageRouter'
+import MarketProducts from '../../ExpertsPages/MarketProducts/MarketProducts';
+import Forum from '../../ExpertsPages/Forum/Forum';
+import Consultations from '../../ExpertsPages/Consultations/Consultations';
 import Reports from '../../ExpertsPages/Reports/Reports';
 import Profile from '../../ExpertsPages/Profile/Profile';
 
@@ -48,9 +48,12 @@ const PagesLayout = ({ token, userId }) => {
     <main className='home-main-container'>
       <Routes>
         <Route path='/CropInfo' element={<CropInfo token={token} userId={userId} />} />
-        <Route path='/MarketProducts' element={<MarketProducts token={token} userId={userId} />} />
+
+        {/* Will Not be Used in Experts */}
+        {/* <Route path='/MarketProducts' element={<MarketProducts token={token} userId={userId} />} /> */}
+        
         <Route path='/Forum' element={<Forum token={token} userId={userId} />} />
-        <Route path='/Consultations/messages/*' element={<Consultations token={token} userId={userId} />} />
+        <Route path='/Consultations' element={<Consultations token={token} userId={userId} />} />
         <Route path='/Reports' element={<Reports token={token} userId={userId} />} />
         <Route path='/Profile' element={<Profile token={token} userId={userId} />} />
       </Routes>
