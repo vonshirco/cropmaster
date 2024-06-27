@@ -8,6 +8,9 @@
     box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
     background-color: #55c058;
   }
+  .header-right{
+    display: flex;
+  }
   .icon{
     color: #fff;
   }
