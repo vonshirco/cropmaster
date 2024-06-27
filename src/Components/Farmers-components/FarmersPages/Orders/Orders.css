@@ -1,6 +1,140 @@
 .orders-container {
-    grid-area: main;
-    overflow-y: auto;
-    padding: 20px 20px;
-    color: #515153;
-  }
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+  color: #515153;
+}
+
+.order-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.order-card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-card h3 {
+  margin-bottom: 10px;
+}
+
+.edit-product-btn {
+  background-color: #32CD32;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-product-btn:hover {
+  background-color: #228B22;
+}
+
+.add-product-btn {
+  background-color: #32CD32;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-product-btn:hover {
+  background-color: #228B22;
+}
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-content {
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.dialog-content h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-product-form label {
+  margin-bottom: 10px;
+}
+
+.add-product-form input,
+.add-product-form textarea {
+  margin-bottom: 15px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-product-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cancel-btn,
+.add-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: white;
+  margin-right: 10px;
+}
+
+.cancel-btn:hover {
+  background-color: #999;
+}
+
+.add-btn {
+  background-color: #32cd32;
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #228b22;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
