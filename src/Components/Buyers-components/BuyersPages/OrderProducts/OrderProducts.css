@@ -1,6 +1,38 @@
 .orders-container {
-    grid-area: main;
-    overflow-y: auto;
-    padding: 20px 20px;
-    color: #515153;
-  }
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+  color: #515153;
+}
+
+.order-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.order-card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-card h3 {
+  margin-bottom: 10px;
+}
+
+.add-to-cart-btn {
+  background-color: #32CD32;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #228B22;
+}

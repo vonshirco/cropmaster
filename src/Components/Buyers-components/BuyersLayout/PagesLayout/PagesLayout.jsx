@@ -20,8 +20,11 @@ const PagesLayout = () => {
         <Route path='/CropInfo' element={<CropInfo/>}/>
         <Route path='/MarketProducts' element={<MarketProducts />}/>
         <Route path='/OrderProducts' element={<OrderProducts />}/>
-        <Route path='/Forum' element={<Forum />}/>
-        <Route path='/Consultations' element={<Consultations />}/>
+
+        {/* Not used in Buyers */}
+        {/* <Route path='/Forum' element={<Forum />}/>
+        <Route path='/Consultations' element={<Consultations />}/> */}
+        
         <Route path='/Reports' element={<Reports />}/>
         <Route path='/Profile' element={<Profile />}/>
       </Routes>

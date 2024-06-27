@@ -48,7 +48,10 @@ const PagesLayout = ({ token, userId }) => {
     <main className='home-main-container'>
       <Routes>
         <Route path='/CropInfo' element={<CropInfo token={token} userId={userId} />} />
-        <Route path='/MarketProducts' element={<MarketProducts token={token} userId={userId} />} />
+
+        {/* Will Not be Used in Experts */}
+        {/* <Route path='/MarketProducts' element={<MarketProducts token={token} userId={userId} />} /> */}
+        
         <Route path='/Forum' element={<Forum token={token} userId={userId} />} />
         <Route path='/Consultations' element={<Consultations token={token} userId={userId} />} />
         <Route path='/Reports' element={<Reports token={token} userId={userId} />} />

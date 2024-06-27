@@ -34,13 +34,14 @@ const SideBarLayout = ({ openSidebarToggle, OpenSidebar }) => {
           <Link to='/buyers/OrderProducts'><BsListCheck className='icon'/> Orders Products</Link>
         </li>
 
-        <li className='sidebarlayout-list-item'>
+        {/* Not used in Buyers */}
+        {/* <li className='sidebarlayout-list-item'>
           <Link to='/buyers/Forum'><MdOutlineForum className='icon'/> Forum Discussions</Link>
         </li>
         
         <li className='sidebarlayout-list-item'>
           <Link to='/buyers/Consultations'> <GrArticle className='icon'/> Consultations</Link>
-        </li>
+        </li> */}
 
         <li className='sidebarlayout-list-item'>
           <Link to='/buyers/Reports'><MdDashboard className='icon'/> Reports</Link>
