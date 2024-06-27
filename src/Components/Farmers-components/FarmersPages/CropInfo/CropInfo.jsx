@@ -248,19 +248,21 @@ const CropInfo = () => {
       <div className='crop-cards'>
         {crops.map((crop) => (
           <div key={crop.id} className="crop-card">
-            <h2>{crop.name}</h2>
-            {crop.image && <img src={crop.image} alt={crop.name} />}
-            <p><strong>Category:</strong> {crop.category}</p>
-            <p><strong>Planting Requirements:</strong> {crop.planting_requirements}</p>
-            <p><strong>Irrigation Schedule:</strong> {crop.irrigation_schedule}</p>
-            <p><strong>Fertilizer Recommendations:</strong> {crop.fertilizer_recommendations}</p>
-            <p><strong>Pest Management:</strong> {crop.pest_management}</p>
-            <p><strong>Harvesting Techniques:</strong> {crop.harvesting_techniques}</p>
-            <p><strong>Total Rating:</strong> {crop.total_rating}</p>
-            <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
-            <div className="button-container">
-              <button className="edit-btn" onClick={() => handleEditClick(crop)}>Edit</button>
-              <button className="delete-btn" onClick={() => handleDeleteCrop(crop.id)}>Delete</button>
+                <h2>{crop.name}</h2>
+                {crop.image && <img src={crop.image} alt={crop.name} />}
+                <div style={{display:"flex", flexDirection:"column", alignItems:"start", justifyContent:"flex-start"}}>
+                <p><strong>Category:</strong> {crop.category}</p>
+                <p><strong>Planting Requirements:</strong> {crop.planting_requirements}</p>
+                <p><strong>Irrigation Schedule:</strong> {crop.irrigation_schedule}</p>
+                <p><strong>Fertilizer Recommendations:</strong> {crop.fertilizer_recommendations}</p>
+                <p><strong>Pest Management:</strong> {crop.pest_management}</p>
+                <p><strong>Harvesting Techniques:</strong> {crop.harvesting_techniques}</p>
+                <p><strong>Total Rating:</strong> {crop.total_rating}</p>
+                <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
+                <div className="button-container">
+                  <button className="edit-btn" onClick={() => handleEditClick(crop)}>Edit</button>
+                  <button className="delete-btn" onClick={() => handleDeleteCrop(crop.id)}>Delete</button>
+                </div>
             </div>
           </div>
         ))}

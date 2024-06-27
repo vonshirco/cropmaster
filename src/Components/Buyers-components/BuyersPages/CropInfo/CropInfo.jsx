@@ -49,14 +49,16 @@ const CropInfo = () => {
         <div key={crop.id} className="crop-card" style={{cursor:"pointer",}}>
           <h2>{crop.name}</h2>
           <img src={crop.image} alt={crop.name} className="crop-image"/>
-          <p><strong>Category:</strong> {crop.category}</p>
-          <p><strong>Planting Requirements:</strong> {crop.description.planting_requirements}</p>
-          <p><strong>Irrigation Schedule:</strong> {crop.description.irrigation_schedule}</p>
-          <p><strong>Fertilizer Recommendations:</strong> {crop.description.fertilizer_recommendations}</p>
-          <p><strong>Pest Management:</strong> {crop.description.pest_management}</p>
-          <p><strong>Harvesting Techniques:</strong> {crop.description.harvesting_techniques}</p>
-          <p><strong>Total Rating:</strong> {crop.total_rating}</p>
-          <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
+          <div style={{display:"flex", flexDirection:"column", alignItems:"start", justifyContent:"flex-start"}}>
+              <p><strong>Category:</strong> {crop.category}</p>
+              <p><strong>Planting Requirements:</strong> {crop.description.planting_requirements}</p>
+              <p><strong>Irrigation Schedule:</strong> {crop.description.irrigation_schedule}</p>
+              <p><strong>Fertilizer Recommendations:</strong> {crop.description.fertilizer_recommendations}</p>
+              <p><strong>Pest Management:</strong> {crop.description.pest_management}</p>
+              <p><strong>Harvesting Techniques:</strong> {crop.description.harvesting_techniques}</p>
+              <p><strong>Total Rating:</strong> {crop.total_rating}</p>
+              <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
+          </div>
         </div>
       ))}
       </div>
