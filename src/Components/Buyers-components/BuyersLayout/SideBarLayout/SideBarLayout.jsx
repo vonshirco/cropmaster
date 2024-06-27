@@ -30,9 +30,10 @@ const SideBarLayout = ({ openSidebarToggle, OpenSidebar }) => {
           <Link to='/buyers/MarketProducts'><MdOutlineProductionQuantityLimits className='icon'/> Markert Products</Link>
         </li>
 
-        <li className='sidebarlayout-list-item'>
+        {/* Everything Done in Market Products */}
+        {/* <li className='sidebarlayout-list-item'>
           <Link to='/buyers/OrderProducts'><BsListCheck className='icon'/> Orders Products</Link>
-        </li>
+        </li> */}
 
         {/* Not used in Buyers */}
         {/* <li className='sidebarlayout-list-item'>
