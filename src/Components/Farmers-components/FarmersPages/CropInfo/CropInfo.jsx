@@ -202,9 +202,9 @@ const CropInfo = () => {
         <button className="add-crop-btn" onClick={() => setShowAddForm(true)}>Add Crop</button>
         {showAddForm && (
           <div className="dialog">
-            <div className="dialog-content">
+            <div className="dialog-content md:w-[40vw]">
               <h2>{editCropId ? 'Edit Crop' : 'Add Crop'}</h2>
-              <form onSubmit={editCropId ? handleEditCrop : handleAddCrop} className='h-[60vh] overflow-y-auto'>
+              <form onSubmit={editCropId ? handleEditCrop : handleAddCrop} className='h-[60vh] overflow-y-auto md:p-2'>
               <label htmlFor="name">Name:</label>
               <input
                 type='text'
