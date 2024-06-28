@@ -147,3 +147,10 @@
     width: 100%; /* One card per row on very small screens */
   }
 }
+
+::-webkit-scrollbar{
+  width: 0.7rem;
+  height: 0.7rem;
+  transition: all;
+  background-color: transparent;
+}
