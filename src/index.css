@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *{
   margin: 0;
   padding: 0;
@@ -24,6 +28,8 @@ a{
   padding-left: 10%; /*Space from left of screen*/
   padding-right: 10%;
 }
+
+
 
 .btn{
   /* background: #FFF; */
@@ -56,3 +62,71 @@ a{
     padding: 14px 22px;
   }
 }
+
+
+::-webkit-scrollbar{
+  width: 0.7rem;
+  height: 0.7rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-track{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #48a30b;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: #76b33e;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-thumb:active{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-corner{
+  background-color: transparent;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-corner:hover{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-corner:active{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-button{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-button:hover{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
+::-webkit-scrollbar-button:active{
+  background-color: #eee;
+  border-radius: 0.5rem;
+  transition: all;
+}
+
