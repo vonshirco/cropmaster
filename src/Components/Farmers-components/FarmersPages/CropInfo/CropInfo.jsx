@@ -159,7 +159,7 @@ const CropInfo = () => {
           <div className="dialog">
             <div className="dialog-content">
               <h2>{editCropId ? 'Edit Crop' : 'Add Crop'}</h2>
-              <form onSubmit={editCropId ? handleEditCrop : handleAddCrop}>
+              <form onSubmit={editCropId ? handleEditCrop : handleAddCrop} className='h-[60vh] overflow-y-auto'>
                 <label htmlFor="name">Name:</label>
                 <input
                   type='text'
@@ -248,7 +248,7 @@ const CropInfo = () => {
       </div>
       <div className='crop-cards'>
         {crops.map((crop) => (
-          <div key={crop.id} className="crop-card">
+          <div key={crop.id} className="crop-card hover:scale-105 transition ease-in-out duration-500 cursor-pointer">
                 <h2>{crop.name}</h2>
                 {crop.image && <img src={crop.image} alt={crop.name} />}
                 <div style={{display:"flex", flexDirection:"column", alignItems:"start", justifyContent:"flex-start"}}>
@@ -260,7 +260,7 @@ const CropInfo = () => {
                 <p><strong>Harvesting Techniques:</strong> {crop.harvesting_techniques}</p>
                 <p><strong>Total Rating:</strong> {crop.total_rating}</p>
                 <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
-                <div className="button-container bg-black">
+                <div className="button-container w-full flex justify-between">
                   <button className="edit-btn" onClick={() => handleEditClick(crop)}>Edit</button>
                   <button className="delete-btn" onClick={() => handleDeleteCrop(crop.id)}>Delete</button>
                 </div>
