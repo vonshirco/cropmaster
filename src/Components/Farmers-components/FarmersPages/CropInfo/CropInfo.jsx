@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CropInfo.css';
@@ -259,7 +260,7 @@ const CropInfo = () => {
                 <p><strong>Harvesting Techniques:</strong> {crop.harvesting_techniques}</p>
                 <p><strong>Total Rating:</strong> {crop.total_rating}</p>
                 <p><strong>Total Ratings Count:</strong> {crop.total_ratings_count}</p>
-                <div className="button-container">
+                <div className="button-container bg-black">
                   <button className="edit-btn" onClick={() => handleEditClick(crop)}>Edit</button>
                   <button className="delete-btn" onClick={() => handleDeleteCrop(crop.id)}>Delete</button>
                 </div>

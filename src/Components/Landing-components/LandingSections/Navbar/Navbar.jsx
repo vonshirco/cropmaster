@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
+    <nav className={`px-8 ${sticky ? 'dark-nav' : ''}`}>
       <Link to='hero' smooth={true} offset={0} duration={500} onClick={closeMenu}>
         <h1>CropMaster</h1>
         {/* <img src={logo} alt="" className='logo'/> */}
