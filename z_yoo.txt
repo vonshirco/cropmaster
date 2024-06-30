@@ -264,3 +264,13 @@
 
 
     DO I NEED TO MAKE CHANGES IN THE MERGESLYAOUT.JSX LAYOUT.JSX AND OTHER FILES? OR IS EVERY CODE GOOD
+
+
+    ACKNOWLEDGEMENT
+First and foremost, I want to express my heartfelt thanks to God for blessing me with life and health throughout this project. This divine grace gave me the strength and ability to complete my academic requirements for the year.
+I'm deeply grateful to the [Department of Computer Science and Engineering] at the [University of Dar es Salaam] for providing us with this amazing opportunity. They allowed us to showcase our abilities and learn so much more through hands-on projects. This valuable experience let us apply the knowledge we gained in our classes, sharpen our skills, and prepare ourselves to tackle real-world challenges in our society.
+I want to express my sincere and deep appreciation to [our supervisor, Dr. Leonard Peter Binamungu]. His guidance, support, and encouragement were truly priceless throughout this entire project. His expert knowledge and insightful suggestions were crucial in helping me successfully complete this work. I've learned so much under his mentorship, and I'm truly thankful for his patience and dedication.
+I also want to thank my classmates and friends who supported me during this journey. Their encouragement and help made the challenging times easier to manage.
+A special thank you goes to my family for their unwavering support and understanding, especially during the long hours I spent working on this project.
+Lastly, I'm very grateful to all the people who provided me with the resources, information, and assistance I needed to complete this project. This includes the library staff, IT support team, and everyone else who contributed in any way.
+This project has been a significant learning experience, and I'm thankful to everyone who played a part in making it possible.
