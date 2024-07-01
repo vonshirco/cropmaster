@@ -1,6 +1,40 @@
 .profile-container {
-    grid-area: main;
-    overflow-y: auto;
-    padding: 20px 20px;
-    color: #515153;
-  }
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+  color: #515153;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-card {
+  background-color: #b4fcb7;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 40px; /* Increased padding */
+  max-width: 600px; /* Increased max-width */
+  width: 100%;
+  text-align: left;
+}
+
+.profile-card h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.profile-card p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.profile-card p strong {
+  color: #4CAF50; /* Green color */
+}
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  margin-top: 20px;
+}
