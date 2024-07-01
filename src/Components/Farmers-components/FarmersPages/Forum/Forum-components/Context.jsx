@@ -13,7 +13,7 @@ return (
 
 
 
-// custom hook
+// custom hooks
 const useGlobalContext = () => {
     return useContext(AppContext)
 }
