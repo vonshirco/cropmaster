@@ -26,9 +26,9 @@ const SideBarLayout = ({ openSidebarToggle, OpenSidebar }) => {
           <Link to='/experts/CropInfo'><GiButterflyFlower className='icon'/> Crops Information</Link>
         </li>
 
-        <li className='sidebarlayout-list-item'>
+        {/* <li className='sidebarlayout-list-item'>
           <Link to='/experts/MarketProducts'><BsListCheck className='icon'/> Markert Products</Link>
-        </li>
+        </li> */}
 
         <li className='sidebarlayout-list-item'>
           <Link to='/experts/Forum'><MdOutlineForum className='icon'/> Forum Discussions</Link>

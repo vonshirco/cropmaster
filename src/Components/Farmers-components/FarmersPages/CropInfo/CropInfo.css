@@ -1,60 +1,156 @@
 .crop-container {
-    grid-area: main;
-    overflow-y: auto;
-    padding: 20px 20px;
-    color: #515153;
-  }
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px;
+  color: #515153;
+}
 
-  .crop-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px 0;
-  }
-  
+.crop-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted width */
+  gap: 15px; /* Reduced gap */
+}
+
+.crop-card {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.crop-card h2 {
+  margin-bottom: 10px;
+}
+
+.crop-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.crop-card p {
+  margin-bottom: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.add-crop-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-crop-btn:hover {
+  background-color: #45a049;
+}
+
+.edit-btn {
+  background-color: #fbc02d;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.edit-btn:hover {
+  background-color: #f9a825;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialog-content {
+  background-color: white;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.dialog-content h2 {
+  margin-bottom: 10px;
+}
+
+.dialog-content label {
+  display: block;
+  margin-bottom: 1px;
+}
+
+.dialog-content input,
+.dialog-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 2px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.dialog-content textarea {
+  width: 100%;
+  padding: 1px;
+  margin-bottom: 2px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.dialog-content .button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.dialog-content .error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
   .crop-card {
-    width: calc(25% - 20px); /* Adjust width for four cards per row */
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #4CAF50; /* Solid border with your brand color */
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    text-align: center;
+    width: calc(50% - 20px); /* Two cards per row on smaller screens */
   }
-  
-  .crop-card img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  .crop-card {
+    width: 100%; /* One card per row on very small screens */
   }
-  
-  .crop-card h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  .crop-card p {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-  
-  .crop-card span {
-    font-style: italic;
-    color: #888;
-  }
-  
-  /* Media Queries for Responsiveness */
-  
-  @media (max-width: 768px) {
-    .crop-card {
-      width: calc(50% - 20px); /* Two cards per row on smaller screens */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .crop-card {
-      width: 100%; /* One card per row on very small screens */
-    }
-  }
+}
+
+::-webkit-scrollbar{
+  width: 0.7rem;
+  height: 0.7rem;
+  transition: all;
+  background-color: transparent;
+}

@@ -115,7 +115,7 @@ const Signup = () => {
           required
         />
 
-        <label htmlFor="location">Location</label>
+        {/* <label htmlFor="location">Location</label>
         <input
           type="text"
           id="location"
@@ -124,7 +124,21 @@ const Signup = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           required
-        />
+        /> */}
+
+      <label htmlFor="location">Location</label>
+        <select
+          id="location"
+          name="location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          required
+        >
+          <option value="" disabled>Select your location</option>
+          <option value="Arusha">Arusha</option>
+          <option value="Dar es Salaam">Dar es Salaam</option>
+          <option value="Dodoma">Dodoma</option>
+        </select>
 
         <button type="submit" className="btn dark-btn">Sign Up</button>
       </form>

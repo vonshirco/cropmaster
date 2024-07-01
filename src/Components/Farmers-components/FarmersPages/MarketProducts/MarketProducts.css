@@ -1,37 +1,107 @@
 .market-container {
   grid-area: main;
   overflow-y: auto;
-  padding: 20px 20px;
+  padding: 20px;
   color: #515153;
 }
 
-.category-filter {
+.form-container {
   margin-bottom: 20px;
 }
 
-.category-filter select {
-  padding: 10px;
-  border: 1px solid #ddd;
+.add-product-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
   border-radius: 5px;
-  font-size: 16px;
+}
+
+.add-product-btn:hover {
+  background-color: #45a049;
+}
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialog-content {
+  background-color: white;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.dialog-content h2 {
+  margin-bottom: 10px;
+}
+
+.dialog-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.dialog-content input,
+.dialog-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.dialog-content .button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.dialog-content .cancel-btn,
+.dialog-content .add-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dialog-content .cancel-btn:hover,
+.dialog-content .add-btn:hover {
+  background-color: #45a049;
+}
+
+.dialog-content .error-message {
+  color: red;
+  margin-top: 10px;
 }
 
 .product-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 15px;
 }
 
 .product-card {
-  width: calc(25% - 20px); /* Adjust width for four cards per row */
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #4CAF50; /* Solid border with your brand color */
+  padding: 20px;
   border-radius: 5px;
-  padding: 15px;
-  margin: 10px;
-  text-align: center;
+}
+
+.product-card h2 {
+  margin-bottom: 10px;
 }
 
 .product-card img {
@@ -40,39 +110,43 @@
   margin-bottom: 10px;
 }
 
-.product-card h2 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
 .product-card p {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-
-.product-card span {
-  font-style: italic;
-  color: #888;
-}
-
-.product-price {
-  color: #32CD32; /* Green color code */
   margin-bottom: 5px;
 }
 
-.availability {
-  font-weight: bold;
-  margin-top: 5px;
-  color: #32CD32; /* Light gray for out-of-stock */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
-.product-card.available .availability {
-  color: #32CD32; /* Green for available */
+.edit-btn {
+  background-color: #fbc02d;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 5px;
 }
-.availability.out-of-stock { /* Override for out-of-stock */
-  color: #999;
+
+.edit-btn:hover {
+  background-color: #f9a825;
 }
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
+}
+
 
 /* Media Queries for Responsiveness */
 
