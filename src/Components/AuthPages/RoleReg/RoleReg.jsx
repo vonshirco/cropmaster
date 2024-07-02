@@ -11,7 +11,7 @@ const RoleReg = () => {
             
             <div className="button-container">
                 <RouterLink to="/signup-farmer" className='role-btn'>
-                    <a href="">I'm a Farmer seeking crop information and market access, and want to participate in discussions</a>
+                    <a href="">I'm a Farmer seeking crop information, market access and want to participate in discussions</a>
                 </RouterLink>
                 <RouterLink to="/signup-buyer" className="role-btn" style={{ background: '#8c8e01'}}>
                     <a href="" >I'm a Buyer looking to purchase crops, get crop information and market insights</a>
