@@ -7,6 +7,14 @@
   gap: 20px;
 }
 
+.heading {
+  text-align: center; /* Center the text */
+  font-size: 2rem; /* Set a large font size */
+  font-weight: bold; /* Make the font bold */
+  color: #4CAF50; /* Set the text color to green */
+  margin-bottom: 1px; /* Add some space below the heading */
+}
+
 .crop-card {
   background-color: white;
   border: 1px solid #ccc;

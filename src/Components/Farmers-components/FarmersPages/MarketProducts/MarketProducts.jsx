@@ -90,7 +90,7 @@ const MarketProducts = () => {
 
   return (
     <div className='market-container'>
-      <h1>Market Products</h1>
+      <h1 className='heading'>Market Products</h1>
       <div className='form-container'>
         <button className="add-product-btn" onClick={() => setShowAddForm(true)}>Add Product</button>
         {showAddForm && (

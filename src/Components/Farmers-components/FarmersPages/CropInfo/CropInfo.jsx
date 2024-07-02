@@ -197,7 +197,7 @@ const CropInfo = () => {
 
   return (
     <div className='crop-container'>
-      <h1>Crop Information</h1>
+      <h1 className='heading'>Crop Information</h1>
       <div className='form-container'>
         <button className="add-crop-btn" onClick={() => setShowAddForm(true)}>Add Crop</button>
         {showAddForm && (

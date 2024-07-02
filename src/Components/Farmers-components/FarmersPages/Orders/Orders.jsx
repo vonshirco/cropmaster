@@ -83,7 +83,7 @@ const Orders = () => {
 
   return (
     <div className='orders-container'>
-      <h1>List of Orders</h1>
+      <h1 className='heading'>List of Orders</h1>
       <button className="add-product-btn" onClick={openDialog}>Add Product</button>
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}
