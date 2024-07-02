@@ -1,31 +1,27 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import { Pie, Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import 'chart.js/auto';
+import {
+  BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine,
+  Bar as RechartsBar,
+} from 'recharts';
+import { format, parseISO } from 'date-fns';
 
-// eslint-disable-next-line react/prop-types
+const colors = [
+  '#8884d8', '#82ca9d', '#ffc658', '#d0ed57', '#a4de6c', '#d0ed57',
+  '#8884d8', '#82ca9d', '#ffc658', '#d0ed57', '#a4de6c', '#d0ed57'
+];
+
 const Reports = ({ token, userId }) => {
   const [consultations, setConsultations] = useState([]);
   const [cropDistribution, setCropDistribution] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [ordersData, setOrdersData] = useState([]);
+  const [userVisits, setUserVisits] = useState([]);
+  const [colorMap, setColorMap] = useState({});
 
   useEffect(() => {
-    const fetchConsultations = async () => {
-      try {
-        const response = await axios.get(`https://tyktyk.pythonanywhere.com/seek-advice/${userId}/messages/`, {
-          headers: {
-            'Authorization': `Token ${token}`
-          }
-        });
-        const sortedConsultations = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-        setConsultations(sortedConsultations);
-      } catch (error) {
-        console.error("Error fetching consultations", error);
-        setError(error);
-      }
-    };
-
     const fetchCropDistribution = async () => {
       try {
         const response = await axios.get('https://tyktyk.pythonanywhere.com/cropinfo/crop-distribution/', {
@@ -36,14 +32,115 @@ const Reports = ({ token, userId }) => {
         setCropDistribution(response.data);
       } catch (error) {
         console.error("Error fetching crop distribution data", error);
-        setError(error);
       }
     };
 
-    fetchConsultations();
+    const fetchOrdersData = async () => {
+      try {
+        const response = await axios.get('https://tyktyk.pythonanywhere.com/orders/stats/monthly/');
+        const products = getUniqueProducts(response.data);
+        const formattedData = formatMonthlyData(response.data, products);
+        setOrdersData(formattedData);
+        generateColorMap(products);
+      } catch (error) {
+        console.error("Error fetching orders data", error);
+      }
+    };
+
+    const fetchUserVisits = async () => {
+      try {
+        const response = await axios.get('https://tyktyk.pythonanywhere.com/api/uservisits/statistics/');
+        const aggregatedData = aggregateMonthlyData(response.data);
+        setUserVisits(aggregatedData);
+      } catch (error) {
+        console.error("Error fetching user visits data", error);
+      }
+    };
+
     fetchCropDistribution();
-    setLoading(false);
+    fetchOrdersData();
+    fetchUserVisits();
   }, [token, userId]);
+
+  const getUniqueProducts = (monthlyData) => {
+    const products = new Set();
+    monthlyData.forEach(item => {
+      products.add(item.product);
+    });
+    return Array.from(products);
+  };
+
+  const generateColorMap = (products) => {
+    const colorMap = {};
+    products.forEach((product, index) => {
+      colorMap[product] = colors[index % colors.length];
+    });
+    setColorMap(colorMap);
+  };
+
+  const formatMonthlyData = (monthlyData, products) => {
+    const dataMap = {};
+
+    monthlyData.forEach(item => {
+      const month = item.month;
+      const product = item.product;
+      const quantity = item.total_quantity;
+
+      if (!dataMap[month]) {
+        dataMap[month] = {};
+        products.forEach(product => {
+          dataMap[month][product] = 0;
+        });
+      }
+
+      dataMap[month][product] += quantity;
+    });
+
+    const formattedData = Object.keys(dataMap).map(month => {
+      const monthData = { month };
+      Object.keys(dataMap[month]).forEach(product => {
+        monthData[product] = dataMap[month][product];
+      });
+      return monthData;
+    });
+
+    return formattedData;
+  };
+
+  const aggregateMonthlyData = (dailyData) => {
+    const monthlyData = {};
+
+    Object.keys(dailyData).forEach(dateString => {
+      const date = parseISO(dateString);
+      const month = format(date, 'yyyy-MM');
+
+      if (!monthlyData[month]) {
+        monthlyData[month] = 0;
+      }
+      monthlyData[month] += dailyData[dateString];
+    });
+
+    return Object.keys(monthlyData).map(month => ({
+      name: month,
+      visits: monthlyData[month],
+    }));
+  };
+
+  const formatDate = (dateString) => {
+    const date = parseISO(dateString);
+    return format(date, 'yyyy-MMM');
+  };
+
+  const formatMonth = (monthString) => {
+    const date = parseISO(`${monthString}-01`);
+    return format(date, 'MMM');
+  };
+
+  const findJanuaryIndex = (data) => {
+    return data.findIndex(item => item.name.endsWith('-01'));
+  };
+
+  const januaryIndex = findJanuaryIndex(userVisits);
 
   const pieData = {
     labels: cropDistribution.map(cd => cd.crops_grown__name),
@@ -92,7 +189,7 @@ const Reports = ({ token, userId }) => {
 
   const barOptions = {
     responsive: true,
-    maintainAspectRatio: false,  // This allows us to manually set the height
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true
@@ -100,78 +197,100 @@ const Reports = ({ token, userId }) => {
     }
   };
 
-  const bodyStyle = {
-    backgroundColor: '#fff',
-    color: 'black',
-    textAlign: 'center',
-    fontSize: '1em',
-    fontFamily: 'Poppins, sans-serif'
+  const chartContainerStyle = {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
+    flexWrap: 'wrap',
   };
 
-  const appStyle = {
-    fontFamily: 'Arial, sans-serif',
-    textAlign: 'center',
-    margin: '20px'
+  const chartStyle = {
+    flex: 1,
+    minWidth: '300px',
+    maxWidth: '500px',
+    height: '400px',
+    margin: '20px',
+  };
+
+  const pieChartStyle = {
+    flex: 1,
+    minWidth: '300px',
+    maxWidth: '300px',
+    height: '300px',
+    margin: '20px',
   };
 
   const tableStyle = {
-    margin: '20px auto',
+    width: '100%',
     borderCollapse: 'collapse',
-    width: '80%'
+    marginTop: '20px',
   };
 
   const thTdStyle = {
     border: '1px solid #ddd',
     padding: '8px',
-    textAlign: 'left'
+    textAlign: 'left',
   };
 
   const thStyle = {
     backgroundColor: '#4CAF50',
-    color: 'white'
+    color: 'white',
+    textAlign: 'left',
   };
 
-  const h1Style = {
-    marginBottom: '20px'
+  const trStyle = {
+    '&:nth-child(even)': { backgroundColor: '#f2f2f2' },
+    '&:hover': { backgroundColor: '#ddd' },
   };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div style={bodyStyle}>
-      <div style={appStyle}>
-        <h1 style={h1Style}>Expert Dashboard</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: '300px', maxWidth: '500px', height: '400px', margin: '20px' }}>
-            <Bar data={barData} options={barOptions} />
-          </div>
-          <div style={{ flex: 1, minWidth: '300px', maxWidth: '300px', height: '300px', margin: '20px' }}>
-            <Pie data={pieData} options={pieOptions} />
-          </div>
+    <div>
+      <h1>Farmers per each crop</h1>
+      <div style={chartContainerStyle}>
+        <div style={chartStyle}>
+          <Bar data={barData} options={barOptions} />
         </div>
-        <h2>Consultation Records</h2>
-        <table style={tableStyle}>
-          <thead>
-            <tr>
-              <th style={{ ...thTdStyle, ...thStyle }}>Date</th>
-              <th style={{ ...thTdStyle, ...thStyle }}>Farmer</th>
-              <th style={{ ...thTdStyle, ...thStyle }}>Problem</th>
-              <th style={{ ...thTdStyle, ...thStyle }}>Feedback</th>
-            </tr>
-          </thead>
-          <tbody>
-            {consultations.map((consultation, index) => (
-              <tr key={index}>
-                <td style={thTdStyle}>{new Date(consultation.created_at).toLocaleDateString()}</td>
-                <td style={thTdStyle}>{consultation.sender}</td>
-                <td style={thTdStyle}>{consultation.topic}</td>
-                <td style={thTdStyle}>{consultation.responses.map(response => response.response_text).join(', ')}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div style={pieChartStyle}>
+          <Pie data={pieData} options={pieOptions} />
+        </div>
       </div>
+      <h2>Crop monthly orders</h2>
+      <ResponsiveContainer width="100%" height={400}>
+        <BarChart data={ordersData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {Object.keys(colorMap).map(product => (
+            <RechartsBar key={product} dataKey={product} fill={colorMap[product]} />
+          ))}
+        </BarChart>
+      </ResponsiveContainer>
+      <h2>User visits per month</h2>
+      <ResponsiveContainer width="100%" height={400}>
+        <BarChart data={userVisits} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {januaryIndex !== -1 && (
+            <ReferenceLine
+              x={userVisits[januaryIndex].name}
+              label={{
+                position: 'insideTopRight',
+                value: 'Year Start',
+                fontWeight: 'bold',
+                fill: 'green'
+              }}
+              stroke="green"
+              strokeWidth={2}
+            />
+          )}
+          <RechartsBar dataKey="visits" fill="#82ca9d" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
