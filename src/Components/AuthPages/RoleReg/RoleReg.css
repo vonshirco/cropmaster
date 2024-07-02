@@ -1,0 +1,94 @@
+/* General styles */
+.role {
+    margin: 50px auto;
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 0%;
+    background: linear-gradient(rgba(8, 0, 58, 0.3), rgba(8, 0, 58, 0.3)),
+      url('../../../assets/hero3.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .role-text {
+    text-align: center;
+    max-width: 1200px;
+    margin-top: 110px;
+  }
+  
+  .role-text h1 {
+    font-size: 45px;
+    font-weight: 400;
+  }
+  
+  .role-text p {
+    font-size: 25px;
+    max-width: 1000px;
+    margin: 10px auto 20px;
+    line-height: 1.4;
+  }
+
+  
+  /* Button container styles */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally on large screens */
+    margin-top: 20px;
+  }
+  
+  .role-btn {
+    background: #4caf50;
+    color: #fff;
+    padding: 11px 23px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    margin: 0 30px; /* Adjust margin for spacing between buttons on large screens */
+    transition: all 0.3s ease-in-out; /* Add transition for smooth hover effect */
+    margin-bottom: 30px;
+  }
+  
+  .role-btn:last-child {
+    margin-right: 0; /* Remove margin from the last button */
+  }
+  
+  .role-btn:hover {
+    background: #388e3c; /* Change background color on hover */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow on hover */
+  }
+
+  .back-home-btn {
+    background: #ebc54a; /* Match the button color */
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 30px;
+    text-decoration: none; /* Remove underline from anchor tag */
+    /* font-weight: bold; */
+    margin-top: 20px; /* Add some space above the button */
+    transition: all 0.3s ease-in-out; /* Add hover effect */
+  }
+  
+  .back-home-btn:hover {
+    background: #eec43b; /* Darken background on hover */
+  }
+  
+  /* Media query for smaller screens (mobile) */
+  @media (max-width: 768px) {
+    /* Reset button styles for mobile */
+    .button-container {
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: center;
+      margin: 20px auto; /* Add margin around buttons on mobile */
+      padding: 15px; /* Add padding around buttons for extra space */
+    }
+  
+    .role-btn {
+      margin: 10px 0; /* Adjust spacing between buttons vertically */
+    }
+  }
+  

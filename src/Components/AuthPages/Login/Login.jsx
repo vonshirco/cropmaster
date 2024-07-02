@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { useMainContext } from '../../../ context';
+import { Link as RouterLink } from 'react-router-dom';
+
 const Login = ({ setToken, setUserId}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -92,8 +94,8 @@ const Login = ({ setToken, setUserId}) => {
             </form>
             {error && <p style={styles.error}>{error}</p>}
       <p style={styles.paragraph}>Forgot your password? <a href="/forgotpassword" style={styles.link}>Reset it here</a></p>
-      <p style={styles.paragraph}>Don't have an account? <a href="/signup" style={styles.link}>Sign Up</a></p>
-      <p style={styles.paragraph}>Back to <a href="/" style={styles.link}>Home</a></p>
+      <p style={styles.paragraph}>Don't have an account? <RouterLink to="/role-reg"><a href="" style={styles.link}>Sign Up</a></RouterLink></p>
+      <p style={styles.paragraph}>Back to <RouterLink to="/"><a href="" style={styles.link}>Home</a></RouterLink></p>
         </div>
     );
 };

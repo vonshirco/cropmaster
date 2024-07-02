@@ -7,9 +7,15 @@ import MergerBuyersLayouts from './Components/Buyers-components/BuyersLayout/Mer
 import MergerExpertsLayouts from './Components/Experts-components/ExpertsLayout/MergeExpertsLayouts/MergeExpertsLayouts';
 import Login from './Components/AuthPages/Login/Login';
 import Signup from './Components/AuthPages/Signup/Signup';
+ 
 
 
 import Logout from './Components/AuthPages/Logout/Logout'; 
+import RoleReg from './Components/AuthPages/RoleReg/RoleReg';
+import SignupFarmer from './Components/AuthPages/Signup/SignupFarmer';
+import SignupExpert from './Components/AuthPages/Signup/SignupExpert';
+import SignupBuyer from './Components/AuthPages/Signup/SignupBuyer';
+
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
@@ -31,7 +37,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login setToken={handleSetToken} setUserId={handleSetUserId} />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/role-reg" element={<RoleReg />} />
+        <Route path="/signup-farmer" element={<SignupFarmer />} />
+        <Route path="/signup-buyer" element={<SignupBuyer />} />
+        <Route path="/signup-expert" element={<SignupExpert />} />
+        {/* <Route path="/signup" element={<Signup />} /> */}
         <Route path="/logout" element={<Logout setToken={handleSetToken} setUserId={handleSetUserId} />} />
         <Route path="/farmers/*" element={<MergeFarmersLayouts setToken={handleSetToken}/>} />
         <Route path="/buyers/*" element={<MergerBuyersLayouts setToken={handleSetToken}/>} />
