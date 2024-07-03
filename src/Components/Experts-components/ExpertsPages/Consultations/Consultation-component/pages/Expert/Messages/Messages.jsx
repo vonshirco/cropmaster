@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { IoSearchSharp } from "react-icons/io5";
+import React, {useEffect} from 'react'
+import BackBtn from '../../../components/BackBtn'
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { IoSearchSharp } from "react-icons/io5";
+import users from './users';
 import api from '../../../../../../../../../api2';
-import BackBtn from '../../../components/BackBtn';
-import { useMainContext } from '../../../../../../../../ context';
+
 import SingleChat from './SingleChat';
+import { useMainContext } from '../../../../../../../../ context';
 const Messages = () => {
   const {token, userData} = useMainContext()
   const [users, setUsers] = React.useState([])
   async function fetchUsers(){
     const {data:{results}} =  await  api.get(
       `/expert_users?expert_id=${userData.id}`)
-    ``
+    
     setUsers(results)
   }
   useEffect(

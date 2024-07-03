@@ -16,7 +16,7 @@ const SingleChat = ({expert}) => {
 
                     <div className='ml-3 flex items-center'>
                     <FaRegUserCircle className='text-2xl'/>
-                    <h1 className='font-semibold text-lg pl-2'>Dr.{expert.username}</h1>
+                    <h1 className='font-semibold text-lg pl-2'>{expert.username}</h1>
 
                     </div>
     </div>
