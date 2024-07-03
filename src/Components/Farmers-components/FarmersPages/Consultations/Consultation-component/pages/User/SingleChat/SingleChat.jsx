@@ -147,7 +147,7 @@ let curr_date = new Date('1970-01-01').toISOString();
 
                     <div className='ml-3 '>
                     <div className=' justify-self-start'>
-                    <h1 className='font-semibold'>Dr.{expert.username}</h1>
+                    <h1 className='font-semibold'>{expert.username}</h1>
                 
 </div>
                     </div>

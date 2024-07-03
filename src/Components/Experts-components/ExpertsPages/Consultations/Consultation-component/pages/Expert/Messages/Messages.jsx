@@ -26,7 +26,7 @@ const Messages = () => {
     <BackBtn />
     <div className=''>
     <div className='sticky top-0 pt-4 pl-14 pb-2  flex items-center w-full shadow '>
-    <h1 className=' font-semibold text-lg'>Dr.{userData.username}</h1>
+    <h1 className=' font-semibold text-lg'>{userData.username}</h1>
     <RiArrowDropDownLine className='text-2xl' />
     </div>
     <div className=' overflow-y-scroll mx-3 mt-3'>

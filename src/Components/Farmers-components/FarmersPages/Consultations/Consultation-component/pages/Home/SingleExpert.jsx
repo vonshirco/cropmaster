@@ -17,7 +17,7 @@ const SingleExpert = ({expert, userId}) => {
     <div className='w-80 mx-auto'>
     <div className='flex justify-between items-center'> 
     <div>
-    <h1 className='my-3 font-semibold '>Dr.{username} <br/> <div className='flex items-center'><FaLocationDot className=''/> <small>{location}</small></div> </h1>
+    <h1 className='my-3 font-semibold '>{username} <br/> <div className='flex items-center'><FaLocationDot className=''/> <small>{location}</small></div> </h1>
    
     </div>
     <button className=' hover:border-0 border border-black text-black hover:text-white hover:bg-black text-sm  px-2  h-8 font-semibold rounded transition duration-100' onClick={()=>{
