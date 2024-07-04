@@ -1,3 +1,5 @@
+/* MarketProducts.css */
+
 .market-products-container {
   grid-area: main;
   overflow-y: auto;
@@ -5,31 +7,8 @@
   color: #515153;
 }
 
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted width */
-  gap: 15px; /* Reduced gap */
-}
-
-.product-card {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.product-card h2 {
-  margin-bottom: 10px;
-}
-
-.product-card p {
-  margin-bottom: 5px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+.form-container {
+  margin-bottom: 20px;
 }
 
 .add-product-btn {
@@ -43,33 +22,6 @@
 
 .add-product-btn:hover {
   background-color: #45a049;
-}
-
-.edit-btn {
-  background-color: #fbc02d;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-right: 5px;
-  border-radius: 5px;
-}
-
-.edit-btn:hover {
-  background-color: #f9a825;
-}
-
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.delete-btn:hover {
-  background-color: #d32f2f;
 }
 
 .dialog {
@@ -86,63 +38,107 @@
 }
 
 .dialog-content {
-  background-color: #fff;
+  background-color: white;
   padding: 20px;
+  max-width: 600px;
+  width: 100%;
   border-radius: 5px;
-  width: 90%;
-  max-width: 500px;
 }
 
 .dialog-content h2 {
-  margin-top: 0;
-}
-
-.dialog-content form {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .dialog-content label {
-  margin-bottom: 5px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .dialog-content input,
 .dialog-content textarea {
-  margin-bottom: 10px;
+  width: 100%;
   padding: 8px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  width: 100%;
 }
 
-.cancel-btn {
-  background-color: #ccc;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-right: 5px;
-  border-radius: 5px;
+.dialog-content .button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
-.cancel-btn:hover {
-  background-color: #b3b3b3;
-}
-
-.add-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.add-btn:hover {
-  background-color: #45a049;
-}
-
-.error-message {
+.dialog-content .error-message {
   color: red;
   margin-top: 10px;
+}
+
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.product-card .product-name {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #2e8b57; /* Dark green */
+}
+
+.product-card .product-price {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.product-card .product-description {
+  margin-bottom: 10px;
+}
+
+.product-card .button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-card .edit-btn {
+  background-color: #fbc02d;
+  color: black;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-card .edit-btn:hover {
+  background-color: #f9a825;
+}
+
+.product-card .delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-card .delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+@media (max-width: 600px) {
+  .product-cards {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+
+  .product-card {
+    width: 100%;
+  }
 }
