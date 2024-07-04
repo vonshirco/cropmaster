@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MarketProducts.css';
@@ -7,30 +8,26 @@ const MarketProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editProductId, setEditProductId] = useState(null);
   const [newProduct, setNewProduct] = useState({
     name: '',
-    category: '',
     price: '',
     description: '',
   });
-  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log('Token:', token); // Debugging: check token value
         const response = await axios.get('https://tyktyk.pythonanywhere.com/market/products/', {
           headers: {
             Authorization: `Token ${token}`,
           },
         });
-        console.log('Response data:', response.data); // Debugging: check response data
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
-        setError(error);
-        console.error('Error fetching products:', error); // Debugging: log error
+        setError('Error fetching products');
         setLoading(false);
       }
     };
@@ -40,35 +37,63 @@ const MarketProducts = () => {
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append('name', newProduct.name);
-      formData.append('category', newProduct.category);
-      formData.append('price', newProduct.price);
-      formData.append('description', newProduct.description);
-      if (selectedFile) {
-        formData.append('image', selectedFile);
-      }
+    const data = {
+      name: newProduct.name,
+      price: newProduct.price,
+      description: newProduct.description,
+    };
 
+    try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('https://tyktyk.pythonanywhere.com/market/products/', formData, {
+      const response = await axios.post('https://tyktyk.pythonanywhere.com/market/products/', data, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           Authorization: `Token ${token}`,
         },
       });
+
       setProducts([...products, response.data]);
       setNewProduct({
         name: '',
-        category: '',
         price: '',
-        description: ''
+        description: '',
       });
-      setSelectedFile(null);
       setShowAddForm(false);
     } catch (error) {
-      setError(error);
-      console.error('Error adding product:', error);
+      setError('Error adding product');
+    }
+  };
+
+  const handleEditProduct = async (e) => {
+    e.preventDefault();
+    const data = {
+      name: newProduct.name,
+      price: newProduct.price,
+      description: newProduct.description,
+    };
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put(`https://tyktyk.pythonanywhere.com/market/products/${editProductId}/`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      const updatedProducts = products.map((product) =>
+        product.id === editProductId ? response.data : product
+      );
+      setProducts(updatedProducts);
+      setEditProductId(null);
+      setNewProduct({
+        name: '',
+        price: '',
+        description: '',
+      });
+      setShowAddForm(false);
+    } catch (error) {
+      setError('Error updating product');
     }
   };
 
@@ -80,90 +105,92 @@ const MarketProducts = () => {
           Authorization: `Token ${token}`,
         },
       });
-      const updatedProducts = products.filter(product => product.id !== productId);
+
+      const updatedProducts = products.filter((product) => product.id !== productId);
       setProducts(updatedProducts);
     } catch (error) {
-      setError(error);
-      console.error('Error deleting product:', error);
+      setError('Error deleting product');
     }
   };
 
+  const handleEditClick = (product) => {
+    setEditProductId(product.id);
+    setNewProduct({
+      name: product.name,
+      price: product.price,
+      description: product.description,
+    });
+    setShowAddForm(true);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }));
+  };
+
   return (
-    <div className='market-container'>
+    <div className='market-products-container'>
       <h1 className='heading'>Market Products</h1>
       <div className='form-container'>
         <button className="add-product-btn" onClick={() => setShowAddForm(true)}>Add Product</button>
         {showAddForm && (
           <div className="dialog">
             <div className="dialog-content">
-              <h2>Add Product</h2>
-              <form onSubmit={handleAddProduct}>
+              <h2>{editProductId ? 'Edit Product' : 'Add Product'}</h2>
+              <form onSubmit={editProductId ? handleEditProduct : handleAddProduct}>
                 <label htmlFor="name">Name:</label>
                 <input
                   type='text'
                   id="name"
+                  name="name"
                   placeholder='Enter product name'
                   value={newProduct.name}
-                  onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                  required
-                />
-                <label htmlFor="category">Category:</label>
-                <input
-                  type='text'
-                  id="category"
-                  placeholder='Enter category'
-                  value={newProduct.category}
-                  onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                  onChange={handleInputChange}
                   required
                 />
                 <label htmlFor="price">Price:</label>
                 <input
                   type='text'
                   id="price"
-                  placeholder='Enter price'
+                  name="price"
+                  placeholder='Enter product price'
                   value={newProduct.price}
-                  onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                  onChange={handleInputChange}
                   required
                 />
                 <label htmlFor="description">Description:</label>
                 <textarea
                   id="description"
-                  placeholder='Enter description'
+                  name="description"
+                  placeholder='Enter product description'
                   value={newProduct.description}
-                  onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                  style={{ minHeight: '40px' }}
+                  onChange={handleInputChange}
                   required
                 ></textarea>
-                <label htmlFor="image">Image:</label>
-                <input
-                  type="file"
-                  id="image"
-                  onChange={(e) => setSelectedFile(e.target.files[0])}
-                  accept=".jpg, .jpeg, .png"
-                />  
                 <div className="button-container">
                   <button type='button' className='cancel-btn' onClick={() => setShowAddForm(false)}>
                     Cancel
                   </button>
                   <button type='submit' className='add-btn'>
-                    Add Product
+                    {editProductId ? 'Update Product' : 'Add Product'}
                   </button>
                 </div>
               </form>
-              {error && <div className="error-message">Error: {error.message}</div>}
+
+              {error && <div className="error-message">Error: {error}</div>}
             </div>
           </div>
         )}
         {loading && <div>Loading...</div>}
-        {error && <div>Error: {error.message}</div>}
       </div>
-      <div className='product-cards'>
+      <div className='product-list'>
         {products.map((product) => (
           <div key={product.id} className="product-card">
             <h2>{product.name}</h2>
-            {product.image && <img src={product.image} alt={product.name} />}
-            <p><strong>Category:</strong> {product.category}</p>
-            <p><strong>Price:</strong> ${product.price}</p>
+            <p><strong>Price:</strong> {product.price}</p>
             <p><strong>Description:</strong> {product.description}</p>
             <div className="button-container">
               <button className="edit-btn" onClick={() => handleEditClick(product)}>Edit</button>

@@ -312,8 +312,8 @@ const CropInfo = () => {
                 <p><strong>Fertilizer Recommendations:</strong> {crop.description[0].fertilizer_recommendations}</p>
                 <p><strong>Pest Management:</strong> {crop.description[0].pest_management}</p>
                 <p><strong>Harvesting Techniques:</strong> {crop.description[0].harvesting_techniques}</p>
-                <p><strong>Total Rating:</strong> {crop.description[0].total_rating}</p>
-                <p><strong>Total Ratings Count:</strong> {crop.description[0].total_ratings_count}</p>
+                {/* <p><strong>Total Rating:</strong> {crop.description[0].total_rating}</p>
+                <p><strong>Total Ratings Count:</strong> {crop.description[0].total_ratings_count}</p> */}
                 {/* <div className="button-container w-full flex justify-between">
                   <button className="edit-btn" onClick={() => handleEditClick(crop)}>Edit</button>
                   <button className="delete-btn" onClick={() => handleDeleteCrop(crop.slug)}>Delete</button>
