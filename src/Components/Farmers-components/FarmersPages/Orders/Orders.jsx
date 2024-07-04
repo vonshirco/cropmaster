@@ -91,10 +91,10 @@ const Orders = () => {
         {orders.map((order) => (
           <div key={order.id} className='order-card'>
             <h3>{order.product_name}</h3>
-            <p><strong>Quantity:</strong> {order.quantity}</p>
+            <p><strong>Quantity:</strong> {order.quantity} {" Kg"}</p>
             <p><strong>Description:</strong> {order.description}</p>
             <p><strong>Total Cost:</strong> <span style={{ color: '#32CD32' }}>${parseFloat(order.total_cost).toFixed(2)}</span></p>
-            <button className='edit-product-btn'>Edit Product</button>
+            <button className='edit-product-btn'>Edit Order</button>
           </div>
         ))}
       </div>
