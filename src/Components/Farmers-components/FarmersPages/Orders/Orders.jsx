@@ -81,18 +81,6 @@ const Orders = () => {
     });
   };
 
-  const handleAcceptOrder = (orderId) => {
-    // Implement logic to accept the order (e.g., update order status)
-    console.log(`Accepted order with ID ${orderId}`);
-    // Example: Send a request to update order status to 'Accepted'
-  };
-
-  const handleRejectOrder = (orderId) => {
-    // Implement logic to reject the order (e.g., update order status)
-    console.log(`Rejected order with ID ${orderId}`);
-    // Example: Send a request to update order status to 'Rejected'
-  };
-
   return (
     <div className='orders-container'>
       <h1 className='heading'>List of Orders</h1>
@@ -106,16 +94,7 @@ const Orders = () => {
             <p><strong>Quantity:</strong> {order.quantity} {" Kg"}</p>
             <p><strong>Description:</strong> {order.description}</p>
             <p><strong>Total Cost:</strong> <span style={{ color: '#32CD32' }}>Tsh {parseFloat(order.total_cost).toFixed(2)}</span></p>
-            {/*
-              Example of conditional rendering based on user role.
-              Replace with actual logic to determine user role.
-            */}
-            {localStorage.getItem('role') === 'Farmer' && (
-              <div className='button-container'>
-                <button className='accept-btn' onClick={() => handleAcceptOrder(order.id)}>Accept Order</button>
-                <button className='reject-btn' onClick={() => handleRejectOrder(order.id)}>Reject Order</button>
-              </div>
-            )}
+            <button className='edit-product-btn'>Manage</button>
           </div>
         ))}
       </div>
